@@ -4,9 +4,9 @@ The site uses only three code files:
 
 - `index.html` — all visible text and sections
 - `styles.css` — layout, spacing, colour, and typography
-- `script.js` — section views, theme toggle, mobile menu, sliding navigation bar, fade-up, custom cursor, section diagrams, and copy email button
+- `script.js` — section views, theme toggle, mobile menu, sliding navigation bar, fade-up, custom cursor, section diagrams, project dialog, and copy email button
 
-The included `resume.pdf` is used by the résumé links and the "Download résumé" button. Fonts load from Google Fonts through a link in the `<head>` of `index.html`.
+Local images are in `assets/`. The included `resume.pdf` is used by the résumé links and the "Download résumé" button. Fonts load from Google Fonts through a link in the `<head>` of `index.html`.
 
 ## Which copy should you edit?
 
@@ -37,15 +37,15 @@ becomes:
 
 ## Add another experience
 
-Find `<!-- EXPERIENCE -->`. Inside `<div class="roles">`, copy one complete `<article class="role reveal"> ... </article>` block and paste it under the other entries. Keep the same shape: role, org, and dates, a one-line summary, 2 impact points with numbers in `<strong>`, then small tags. Give it a new `data-diagram` name and add a matching entry to `DIAGRAMS` in `script.js`.
+Find `<!-- EXPERIENCE -->`. Inside `<ol class="timeline">`, copy one complete `<li class="timeline-item reveal"> ... </li>` block and paste it in order: current roles first by newest start date, then past roles by most recent end date. Keep the same shape: the dates in `timeline-date`, then in the card the logo tile, role, employer (`role-org`), research area if any (`role-project`), a short overview, 3 highlights with numbers in `<strong>`, tool tags, and extra detail inside `<details class="more-details">`. Delete the `<span class="org-logo">` if the role is not at MacEwan. Give it a new `data-diagram` name and add a matching entry to `DIAGRAMS` in `script.js`.
 
 ## Add another project
 
-Find `<!-- PROJECTS -->`. Copy one complete `<article class="project reveal"> ... </article>` block, paste it under the others, and replace the content. Each tech tag is one `<li>` in the `tech` list. Extra detail goes inside `<details class="project-more">`. Add `<p class="award-badge">Award-winning</p>` next to the `<h3>` only if it applies. Give it a new `data-diagram` name and add a matching entry to `DIAGRAMS` in `script.js`.
+Find `<!-- PROJECTS`. Copy one complete `<article class="project-tile reveal"> ... </article>` block, paste it under the others, and replace the content. The grid adds rows by itself. Keep the tile short: name, a one-line pitch, and a few tech tags. Update the button's `aria-label` with the new name. Add `<p class="award-badge">Award-winning</p>` next to the `<h3>` only if it applies. Everything in `<div class="project-detail">` shows in the dialog when "View more" is pressed, and the dialog draws the diagram in the empty `diagram--modal` box. Give it a new `data-diagram` name and add a matching entry to `DIAGRAMS` in `script.js`.
 
 ## Add another organization
 
-Find `<!-- ORGANIZATIONS -->`. Copy one complete `<article class="role reveal"> ... </article>` block, paste it under the others, and replace the content. Use 1 or 2 bullets. Give it a new `data-diagram` name and add a matching entry to `DIAGRAMS` in `script.js`.
+Find `<!-- ORGANIZATIONS -->`. Copy one complete `<article class="role reveal"> ... </article>` block, paste it under the others, and replace the content. Use a short overview, 3 highlights, and extra detail inside `<details class="more-details">`. Give it a new `data-diagram` name and add a matching entry to `DIAGRAMS` in `script.js`.
 
 ## Add a skill logo
 
@@ -57,7 +57,11 @@ Find `<ul class="status-badges">` and edit, add, or remove a `<li class="status-
 
 ## Change a stat
 
-Find `<dl class="stats">` and edit the text in the `<dd>`. Stats should match the Experience section and your résumé.
+Find `<dl class="stats">` and edit the text in the `<dd>`. Stats should match the Experience section and your résumé. Keep the governance figures (7,700+ to 5,350) and the Global Economic Prospects figure (161 economies) as separate claims.
+
+## Change the MacEwan logo
+
+The files are `assets/macewan-mark.svg` (light mode) and `assets/macewan-mark-white.png` (dark mode), both unmodified downloads from macewan.ca. `--org-logo` at the top of `styles.css` chooses which one shows. Replace a file with a newer official one, and do not edit the artwork.
 
 ## Add a completely new section
 
@@ -106,7 +110,7 @@ The title and description shown on LinkedIn are the `og:` tags in the `<head>` o
 
 ## Change the colours
 
-The colours are variables at the top of `styles.css`. There are three blocks: the light theme, then two identical dark blocks (one follows the system setting, one follows the toggle). When you change a dark colour, change it in both dark blocks. Check any new colour in both themes. Text links use `--link` and `--link-hover`. If you change the main colour, also update `THEME_COLORS` in `script.js`, the `theme-color` tags in `index.html`, `favicon.svg`, the favicon PNGs, and `og-image.png`.
+The colours are variables at the top of `styles.css`. There are three blocks: the light theme, then two identical dark blocks (one follows the system setting, one follows the toggle). When you change a dark colour, change it in both dark blocks. Check any new colour in both themes. Text links use `--link` and `--link-hover`. The sidebar uses `--sidebar-bg`, `--sidebar-line`, and `--nav-active`. If you change the main colour, also update `THEME_COLORS` in `script.js`, the `theme-color` tags in `index.html`, `favicon.svg`, the favicon PNGs, and `og-image.png`.
 
 ## Change the fonts
 
@@ -114,7 +118,7 @@ Update the Google Fonts link in the `<head>` of `index.html`, then edit `--sans`
 
 ## Change a diagram
 
-Find `DIAGRAMS` in `script.js`. Sections are listed by their `id`, and cards by their `data-diagram` name. Most diagrams are a simple list of `steps`, each `[label, note]`. Use `|` in a note for a second line. Those always get a travelling amber dot. A custom diagram lists `nodes` (`[x, y, type, label, note]`) and `edges` (`[from, to]`) instead, in a 240 by 440 box. Add a number of seconds to an edge, such as `[0, 2, 7]`, to send a data dot along it, and `"warm"` after the seconds to make that dot amber. Labels must fit inside the box. `chain` is the short version shown on narrow screens. Use only facts from your résumé.
+Find `DIAGRAMS` in `script.js`. Sections are listed by their `id`, and cards by their `data-diagram` name. Most diagrams are a simple list of `steps`, each `[label, note]`. Use `|` in a note for a second line. Those always get a travelling amber dot. A custom diagram lists `nodes` (`[x, y, type, label, note]`) and `edges` (`[from, to]`) instead, in a 240 by 440 box. Add a number of seconds to an edge, such as `[0, 2, 7]`, to send a data dot along it, and `"warm"` after the seconds to make that dot amber. Add `"loop"` as the fifth value to curve an edge back to an earlier step, and give those nodes an x of at least 50 so the curve stays in the box. Labels must fit inside the box. `chain` is the short version shown on narrow screens. Use only facts from your résumé and your own project notes.
 
 ## Preview and publish
 

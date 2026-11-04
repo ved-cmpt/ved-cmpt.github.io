@@ -1,8 +1,6 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const root = document.documentElement;
 
-document.querySelector("#year").textContent = new Date().getFullYear();
-
 /* Custom cursor: a solid caret with a soft ring, as a real browser cursor image. The operating
    system moves it, so it follows the mouse instantly. Desktop mouse only, and off for
    reduced-motion visitors. Colours are read from the theme, so they follow any palette change. */
@@ -139,7 +137,6 @@ const highlightNav = (id) => {
    the browser's back and forward buttons all work. CSS does the hiding, using data-view on <html>. */
 const views = [...document.querySelectorAll("main > section[id]")];
 const viewIds = views.map((view) => view.id);
-const BASE_TITLE = document.title;
 const LEAVE_MS = 140;
 let currentView = null;
 let leaveTimer;
@@ -163,7 +160,6 @@ const showView = (id, moveFocus) => {
   lastScrollY = window.scrollY;
   setActiveCard(cardAtScrollPosition());
   const heading = view.querySelector("h1, h2");
-  document.title = id === "home" ? BASE_TITLE : `${heading.textContent} — Vedsai Vangapandu`;
   if (moveFocus) {
     /* Puts keyboard and screen reader users at the start of the new view */
     heading.tabIndex = -1;
@@ -194,6 +190,7 @@ const goToView = (id) => {
 
 /* Opens the view named in the URL. An unknown hash falls back to Home and is cleared. */
 const openViewFromUrl = () => {
+  if (modal.open) modal.close();
   if (location.hash && !viewIds.includes(location.hash.slice(1))) history.replaceState(null, "", location.pathname);
   goToView(viewFromHash());
 };
@@ -264,7 +261,7 @@ window.addEventListener("resize", () => {
 });
 document.fonts?.ready.then(moveIndicator);
 
-/* Background: a small labelled diagram for each section and card, based on the résumé, on the right only.
+/* Background: a small labelled diagram for each section and card, based on the résumé and Vedsai's supplied details, on the right only.
    A simple flow lists its "steps" as [label, note]. Use "|" in a note for a second line.
    A custom diagram lists "nodes" as [x, y, type, label, note, side] and "edges" as [from, to, seconds, tone, shape].
    Add seconds to an edge to send a data dot along it, and "warm" to make that dot amber.
@@ -307,68 +304,74 @@ const DIAGRAMS = {
   /* Experience */
   worldbank: {
     caption: "World Bank data pipeline",
-    steps: [["World Bank REST API", "7,700+ raw records"], ["Python", "OpenPyXL, Excel"], ["validation"], ["analysis-ready dataset", "5,350 obs, 161 economies"]],
-    chain: ["World Bank", "Python", "validation", "dataset"],
-  },
-  recall: {
-    caption: "Product recall workflow",
-    steps: [["recall records", "9,793 records, 82 variables"], ["Pandas, OpenPyXL"], ["calculations", "~9,700 calculations|four analytical measures"], ["reports, visualizations", "Power BI, Tableau, Plotly"]],
-    chain: ["records", "Pandas", "measures", "reports"],
-  },
-  nonprofit: {
-    caption: "Nonprofit performance analysis",
-    steps: [["academic studies", "170+ studies"], ["Pandas, NumPy", "OpenPyXL, python-docx"], ["machine learning, NLP", "TF-IDF, K-Means, regression"], ["automated research reporting"]],
-    chain: ["studies", "Pandas", "ML, NLP", "reporting"],
-  },
-  saaf: {
-    caption: "SAAF HCI research",
-    steps: [["user requirements"], ["Figma prototypes"], ["8 persuasive features"], ["5 HCI expert evaluations"], ["SeGAH 2026 paper", "first author"]],
-    chain: ["requirements", "Figma", "experts", "SeGAH 2026"],
+    steps: [["World Bank API, source data"], ["Inspect raw records"], ["Standardize codes, labels"], ["Reshape wide to long"], ["Country-year observations"], ["Validate mappings"], ["Analysis-ready tables"]],
+    chain: ["World Bank API", "Standardize", "Validate", "Tables"],
   },
   tutor: {
     caption: "Student tutoring",
-    steps: [["student question"], ["analytical problem-solving"], ["adapt explanation"], ["understanding"]],
-    chain: ["question", "solve", "adapt", "understanding"],
+    steps: [["Student question"], ["Break into manageable steps"], ["Troubleshoot mistakes"], ["Adapt the explanation"], ["Constructive feedback"], ["Independent problem-solving"]],
+    chain: ["Question", "Steps", "Feedback", "Independence"],
+  },
+  recall: {
+    caption: "Product recall workflow",
+    nodes: [[36, 56, "source", "Recall records"], [150, 56, "source", "Papers"], [36, 112, "step", "Extract, consolidate"], [36, 160, "step", "Standardize attributes"], [36, 208, "step", "Company, event histories"], [36, 256, "step", "Recall-experience measures"], [36, 304, "step", "Validate values"], [36, 352, "step", "Summarize, visualize"], [36, 400, "store", "Figures, tables, manuscript"]],
+    edges: [[0, 2, 7], [1, 2, 9], [2, 3], [3, 4, 6], [4, 5], [5, 6, 7, "warm"], [6, 7], [7, 8, 6]],
+    chain: ["Records", "Standardize", "Measures", "Manuscript"],
+  },
+  nonprofit: {
+    caption: "Nonprofit research workflow",
+    nodes: [[36, 56, "source", "Papers"], [150, 56, "source", "Surveys"], [36, 112, "step", "Extract variables"], [36, 164, "step", "Structured literature table"], [36, 216, "step", "Clean, validate"], [36, 272, "step", "TF-IDF, K-Means"], [150, 272, "step", "Regression", "reliability"], [36, 330, "step", "Compare framework"], [36, 375, "step", "Tables, figures"], [36, 420, "store", "Citations, manuscript"]],
+    edges: [[0, 2, 7], [1, 2, 9], [2, 3], [3, 4, 6], [4, 5, 7], [4, 6, 8, "warm"], [5, 7], [6, 7], [7, 8, 6], [8, 9]],
+    chain: ["Papers, surveys", "Text analysis", "Statistics", "Manuscript"],
+  },
+  saaf: {
+    caption: "SAAF design and research",
+    nodes: [[50, 52, "source", "Research requirements"], [50, 104, "step", "Figma prototypes"], [50, 156, "step", "Features, scenarios"], [50, 208, "step", "Expert evaluation", "five HCI experts"], [50, 268, "step", "Analyze ratings, themes"], [50, 320, "step", "Revise recommendations"], [50, 380, "store", "Research paper", "SeGAH 2026, first author"]],
+    edges: [[0, 1, 6], [1, 2], [2, 3, 7], [3, 4], [4, 5, 6], [5, 6, 7, "warm"], [5, 1, 11, null, "loop"]],
+    chain: ["Prototypes", "Experts", "Analysis", "SeGAH 2026"],
   },
 
   /* Projects */
   duck: {
-    caption: "Duck Duck Defer architecture",
-    nodes: [[95, 60, "source", "Kotlin app", "Jetpack Compose"], [26, 160, "step", "Firebase Auth"], [156, 160, "step", "Firestore"], [95, 260, "step", "Cloud Functions"], [26, 372, "step", "Cloud Messaging"], [156, 372, "store", "Gemini API", "via REST"]],
-    edges: [[0, 1, 7], [0, 2], [1, 3], [2, 3, 8, "warm"], [3, 4], [3, 5, 6]],
-    chain: ["Kotlin app", "Firebase", "Functions", "Gemini API"],
+    caption: "MVVM and DuckBot pipeline",
+    nodes: [[18, 56, "source", "Compose UI", "View"], [18, 124, "step", "ViewModel"], [18, 192, "step", "Repository", "Model"], [128, 56, "source", "DuckBot chat"], [128, 112, "step", "Gemini API"], [128, 168, "step", "Action registry"], [128, 224, "step", "Secure actions"], [18, 290, "step", "Firestore"], [128, 290, "step", "Cloud Functions", "role checks"], [73, 360, "step", "Real-time state"], [73, 414, "store", "Updated UI"]],
+    edges: [[0, 1, 6], [1, 2], [2, 7, 8], [3, 4, 7], [4, 5], [5, 6, 6], [6, 8, 7, "warm"], [7, 9], [8, 9, 8], [9, 10, 6]],
+    chain: ["Compose UI", "ViewModel", "DuckBot", "Firebase"],
   },
   iknow: {
-    caption: "IknowServiceAI architecture",
-    steps: [["React frontend"], ["FastAPI microservices", "Docker-containerized"], ["Gemini API", "classification, retrieval,|recommendations"], ["human-in-the-loop approval"], ["PostgreSQL", "audit logging"]],
-    chain: ["React", "FastAPI", "Gemini API", "PostgreSQL"],
+    caption: "IknowServiceAI request flow",
+    steps: [["React interface"], ["FastAPI service"], ["Gemini classification"], ["Knowledge retrieval"], ["Recommendations"], ["Human-in-the-loop approval"], ["PostgreSQL, audit logging"], ["Response in React"]],
+    chain: ["React", "FastAPI", "Gemini", "PostgreSQL"],
   },
   movie: {
-    caption: "Movie rental system",
-    steps: [["ER diagrams, schemas"], ["SQL database", "joins, nested queries"], ["C# .NET WinForms app", "CRUD, rentals, inventory"], ["transaction tracking"]],
-    chain: ["schemas", "SQL", "C# .NET", "tracking"],
+    caption: "Three-layer architecture",
+    nodes: [[62, 66, "source", "Windows Forms UI", "presentation layer"], [62, 170, "step", "C# application logic", "rentals, inventory, CRUD"], [62, 274, "store", "SQL database", "keys, joins, aggregations"], [62, 378, "step", "Business reports", "sales, rentals, customers"]],
+    edges: [[0, 1, 6], [1, 2, 7, "warm"], [2, 3, 6], [2, 0, 10, null, "loop"]],
+    chain: ["Windows Forms", "C# logic", "SQL database"],
   },
   tower: {
-    caption: "Tower of Finance",
-    steps: [["player"], ["Unity, C# gameplay", "progression, quizzes"], ["finance points"], ["financial literacy"]],
-    chain: ["player", "gameplay", "points", "literacy"],
+    caption: "Gameplay loop",
+    nodes: [[50, 56, "source", "Wave spawns"], [50, 106, "step", "Move, shoot"], [50, 156, "step", "Enemy AI, health"], [50, 206, "step", "Finance points"], [50, 256, "step", "Quizzes"], [50, 306, "step", "Upgrades"], [50, 356, "step", "Wave results"], [50, 410, "store", "Victory or game over"]],
+    edges: [[0, 1, 6], [1, 2], [2, 3, 7], [3, 4], [4, 5, 6], [5, 6], [6, 7, 7, "warm"], [6, 0, 12, null, "loop"]],
+    chain: ["Waves", "Combat", "Quizzes", "Upgrades"],
   },
 
   /* Organizations */
   maia: {
     caption: "MacEwan AI Alliance",
-    steps: [["executive leadership"], ["strategic planning"], ["AI and ML initiatives", "emerging technologies"], ["AI-focused student community"]],
-    chain: ["leadership", "planning", "initiatives", "community"],
+    steps: [["Executive team"], ["Direction, priorities"], ["Plan community activities"], ["AI learning initiatives", "AI, ML, emerging technologies"], ["Knowledge sharing"], ["Inclusive AI community"]],
+    chain: ["Executives", "Planning", "Initiatives", "Community"],
   },
   events: {
     caption: "Data Analytics Club events",
-    steps: [["event planning"], ["technical workshops, speakers"], ["schedules, technical setup"], ["event delivery"]],
-    chain: ["planning", "workshops", "setup", "delivery"],
+    nodes: [[50, 56, "source", "Executives"], [140, 56, "source", "Participants"], [50, 124, "step", "Plan, coordinate"], [50, 188, "step", "Speakers, workshops"], [50, 252, "step", "Schedule, setup, resources"], [50, 316, "step", "Clear communication"], [50, 392, "store", "Event delivery", "continuous improvement"]],
+    edges: [[0, 2, 7], [1, 2, 9], [2, 3], [3, 4, 6], [4, 5], [5, 6, 7, "warm"], [6, 2, 12, null, "loop"]],
+    chain: ["Planning", "Sessions", "Setup", "Delivery"],
   },
   badminton: {
-    caption: "Badminton club",
-    steps: [["weekly activities"], ["equipment, event logistics"], ["inclusive student environment"]],
-    chain: ["activities", "logistics", "students"],
+    caption: "Badminton club volunteering",
+    steps: [["Prepare space, equipment"], ["Weekly activities"], ["Event logistics"], ["Coordinate with organizers"], ["Inclusive student community"]],
+    chain: ["Equipment", "Activities", "Logistics", "Community"],
   },
 };
 
@@ -382,7 +385,7 @@ const layoutSteps = (steps) => {
 };
 
 const edgePath = ([x1, y1], [x2, y2], flow, shape) => {
-  if (shape === "loop") return `M${x1} ${y1}C${x1 - 100} ${y1} ${x2 - 100} ${y2} ${x2} ${y2}`;
+  if (shape === "loop") return `M${x1} ${y1}C${x1 - 60} ${y1} ${x2 - 60} ${y2} ${x2} ${y2}`;
   if (flow === "right") {
     const middle = (x1 + x2) / 2;
     return `M${x1} ${y1}C${middle} ${y1} ${middle} ${y2} ${x2} ${y2}`;
@@ -535,6 +538,100 @@ const diagramObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => entry.target.classList.toggle("is-offscreen", !entry.isIntersecting));
 });
 document.querySelectorAll(".diagram").forEach((host) => diagramObserver.observe(host));
+
+/* Project details: "View more" copies a tile's hidden details into one shared dialog. The browser's
+   modal dialog makes the rest of the page inert, and Tab is kept inside it. The X button, Esc, or a
+   click outside closes it, and focus returns to the button that opened it. */
+const modal = document.querySelector("#project-modal");
+const modalContent = modal.querySelector(".modal-content");
+const modalScroll = modal.querySelector(".modal-scroll");
+const modalBadge = modal.querySelector(".modal-badge");
+const FOCUSABLE = "a[href], button:not([disabled]), summary, [tabindex='0']";
+const MODAL_CLOSE_MS = 160;
+let modalOpener = null;
+let modalCloseTimer;
+let pressStartedOutside = false;
+
+/* Releasing the scrollbar space widens the viewport slightly. Measuring first and keeping these two
+   values while the dialog is open means nothing behind it moves or rewraps. */
+const holdLayout = () => {
+  const probe = document.createElement("div");
+  probe.style.cssText = "position:fixed;width:100vw;height:0;visibility:hidden";
+  document.body.append(probe);
+  root.style.setProperty("--vw", `${probe.getBoundingClientRect().width / 100}px`);
+  probe.remove();
+  root.style.setProperty("--scrollbar-offset", `${window.innerWidth - document.body.getBoundingClientRect().width}px`);
+};
+
+const openProject = (tile, opener) => {
+  modalOpener = opener;
+  modal.querySelector("#project-modal-title").textContent = tile.querySelector("h3").textContent;
+  modal.querySelector(".modal-pitch").textContent = tile.querySelector(".tile-pitch").textContent;
+  modalBadge.hidden = !tile.querySelector(".award-badge");
+  modalContent.replaceChildren(tile.querySelector(".project-detail").cloneNode(true));
+  const host = modalContent.querySelector(".diagram--modal");
+  host.innerHTML = drawFullDiagram(DIAGRAMS[tile.dataset.diagram]);
+  host.firstElementChild.classList.add("is-entering");
+  diagramObserver.observe(host);
+  holdLayout();
+  root.classList.add("modal-open");
+  modal.showModal();
+  modalScroll.scrollTop = 0;
+};
+
+const closeProject = () => {
+  if (!modal.open || modal.classList.contains("is-closing")) return;
+  if (reduceMotion) {
+    modal.close();
+    return;
+  }
+  modal.classList.add("is-closing");
+  modalCloseTimer = setTimeout(() => modal.close(), MODAL_CLOSE_MS);
+};
+
+document.querySelectorAll(".tile-open").forEach((button) => {
+  button.hidden = false;
+  button.addEventListener("click", () => openProject(button.closest(".project-tile"), button));
+});
+modal.querySelector(".modal-close").addEventListener("click", closeProject);
+/* Esc: play the closing fade first. A second Esc closes it straight away. */
+modal.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeProject();
+});
+/* The backdrop counts as the dialog itself. Dragging a text selection out of the panel must not close it. */
+modal.addEventListener("pointerdown", (event) => {
+  pressStartedOutside = event.target === modal;
+});
+modal.addEventListener("click", (event) => {
+  if (event.target === modal && pressStartedOutside) closeProject();
+});
+modal.addEventListener("keydown", (event) => {
+  if (event.key !== "Tab") return;
+  const items = [...modal.querySelectorAll(FOCUSABLE)].filter((item) => item.getClientRects().length);
+  const first = items[0];
+  const last = items[items.length - 1];
+  const focused = document.activeElement;
+  if (event.shiftKey && (focused === first || focused === modal)) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && focused === last) {
+    event.preventDefault();
+    first.focus();
+  }
+});
+modal.addEventListener("close", () => {
+  clearTimeout(modalCloseTimer);
+  modal.classList.remove("is-closing");
+  root.classList.remove("modal-open");
+  root.style.removeProperty("--scrollbar-offset");
+  root.style.removeProperty("--vw");
+  const host = modalContent.querySelector(".diagram--modal");
+  if (host) diagramObserver.unobserve(host);
+  modalContent.replaceChildren();
+  modalOpener?.focus({ preventScroll: true });
+  modalOpener = null;
+});
 
 /* A logo that fails to load is removed, leaving just the label */
 document.addEventListener("error", (event) => {
