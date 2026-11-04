@@ -1,12 +1,14 @@
-# Vedsai V — Minimal Portfolio
+# Vedsai Vangapandu — Portfolio
 
-A calm, centered, one-column portfolio for job applications.
+A personal, readability-first portfolio for job applications. Each section is its own view, with light and dark themes, a sidebar on desktop, and a top bar with a menu on mobile.
 
 ## Files
 - `index.html` — content and sections
-- `styles.css` — design
-- `script.js` — navigation and custom cursor
+- `styles.css` — design and animations
+- `script.js` — section views, theme toggle, menu, sliding navigation bar, fade-up, custom cursor, section diagrams, and copy email button
 - `resume.pdf` — downloadable résumé
+- `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` — "VV" site icons
+- `og-image.png` — preview image for links shared on LinkedIn and elsewhere
 - `EDITING.md` — manual editing instructions
 - `PROMPTS.md` — ready-to-use Cursor/Codex prompts
 - `AGENTS.md` — rules for coding agents
