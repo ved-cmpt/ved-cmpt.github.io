@@ -43,6 +43,8 @@ Find `<!-- EXPERIENCE -->`. Inside `<ol class="timeline">`, copy one complete `<
 
 Find `<!-- PROJECTS`. Copy one complete `<article class="project-tile reveal"> ... </article>` block, paste it under the others, and replace the content. The grid adds rows by itself. Keep the tile short: name, a one-line pitch, and a few tech tags. Update the button's `aria-label` with the new name. Add `<p class="award-badge">Award-winning</p>` next to the `<h3>` only if it applies. Everything in `<div class="project-detail">` shows in the dialog when "View more" is pressed, and the dialog draws the diagram in the empty `diagram--modal` box. Give it a new `data-diagram` name and add a matching entry to `DIAGRAMS` in `script.js`.
 
+If the project has a live demo and a public repository, copy the whole Offshoot tile instead. It adds the two icon links next to "View more", and its details include the "Live demo ↗" and "GitHub ↗" buttons, a "Try the demo" box for public demo logins, screenshots, and a grouped tech stack. Put the screenshots in `assets/projects/<project>/` as WebP, at most about 1400 pixels wide, and give each one alt text and its `width` and `height`.
+
 ## Add another organization
 
 Find `<!-- ORGANIZATIONS -->`. Copy one complete `<article class="role reveal"> ... </article>` block, paste it under the others, and replace the content. Use a short overview, 3 highlights, and extra detail inside `<details class="more-details">`. Give it a new `data-diagram` name and add a matching entry to `DIAGRAMS` in `script.js`.
