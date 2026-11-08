@@ -332,16 +332,28 @@ const DIAGRAMS = {
   },
 
   /* Projects */
+  offshoot: {
+    caption: "Offshoot modernization flow",
+    nodes: [[50, 56, "source", "Angular UI"], [50, 116, "step", "FastAPI orchestrator"], [18, 182, "step", "COBOL analysis", "no AI"], [134, 182, "step", "AI agent", "Gemini or mock"], [50, 256, "step", "Sandboxed runners", "GnuCOBOL, .NET"], [50, 324, "step", "Equivalence harness", "500 cases, gates"], [18, 404, "store", "PostgreSQL"], [128, 404, "store", "YARP facade"]],
+    edges: [[0, 1, 6], [1, 2], [1, 3, 7], [2, 4, 8], [3, 4], [4, 5, 6], [5, 6, 7], [5, 7, 8, "warm"]],
+    chain: ["COBOL", "AI agent", "Sandbox", "Equivalence"],
+  },
+  iknow: {
+    caption: "IknowServiceAI request flow",
+    steps: [["React UI"], ["FastAPI backend"], ["Redaction"], ["Full-text search", "published articles"], ["AI agent", "Gemini or mock"], ["Policy gate", "staff review if flagged"], ["PostgreSQL", "append-only audit"]],
+    chain: ["React", "FastAPI", "AI agent", "Review"],
+  },
+  claimwillow: {
+    caption: "ClaimWillow claim flow",
+    nodes: [[50, 56, "source", "React + TypeScript UI", "policyholder, adjuster, admin"], [50, 128, "step", "Spring Boot REST API", "session + CSRF"], [50, 196, "step", "Claim services"], [18, 260, "step", "State machine"], [128, 260, "step", "Rules R1–R6"], [50, 326, "step", "Audit events", "append-only"], [50, 404, "store", "PostgreSQL", "JPA, Flyway"]],
+    edges: [[0, 1, 6], [1, 2, 7], [2, 3], [2, 4, 8], [3, 5, 7], [4, 5], [5, 6, 6, "warm"]],
+    chain: ["React", "Spring Boot", "Rules", "PostgreSQL"],
+  },
   duck: {
     caption: "MVVM and DuckBot pipeline",
     nodes: [[18, 56, "source", "Compose UI", "View"], [18, 124, "step", "ViewModel"], [18, 192, "step", "Repository", "Model"], [128, 56, "source", "DuckBot chat"], [128, 112, "step", "Gemini API"], [128, 168, "step", "Action registry"], [128, 224, "step", "Secure actions"], [18, 290, "step", "Firestore"], [128, 290, "step", "Cloud Functions", "role checks"], [73, 360, "step", "Real-time state"], [73, 414, "store", "Updated UI"]],
     edges: [[0, 1, 6], [1, 2], [2, 7, 8], [3, 4, 7], [4, 5], [5, 6, 6], [6, 8, 7, "warm"], [7, 9], [8, 9, 8], [9, 10, 6]],
     chain: ["Compose UI", "ViewModel", "DuckBot", "Firebase"],
-  },
-  iknow: {
-    caption: "IknowServiceAI request flow",
-    steps: [["React interface"], ["FastAPI service"], ["Gemini classification"], ["Knowledge retrieval"], ["Recommendations"], ["Human-in-the-loop approval"], ["PostgreSQL, audit logging"], ["Response in React"]],
-    chain: ["React", "FastAPI", "Gemini", "PostgreSQL"],
   },
   movie: {
     caption: "Three-layer architecture",
