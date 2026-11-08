@@ -6,7 +6,7 @@ A personal, readability-first portfolio for job applications. Each section is it
 - `index.html` — content and sections
 - `styles.css` — design and animations
 - `script.js` — section views, theme toggle, menu, sliding navigation bar, fade-up, custom cursor, section diagrams, project dialog, and copy email button
-- `assets/` — official MacEwan University logo files, unmodified from macewan.ca
+- `assets/` — official MacEwan University logo files, unmodified from macewan.ca, and project screenshots in `assets/projects/`
 - `resume.pdf` — downloadable résumé
 - `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` — "VV" site icons
 - `og-image.png` — preview image for links shared on LinkedIn and elsewhere

@@ -298,6 +298,343 @@
             <p class="section-sub">Software built from requirements through testing.</p>
           </header>
           <div class="project-grid">
+            <article class="project-tile reveal" data-diagram="offshoot">
+              <div class="tile-top">
+                <h3>Offshoot</h3>
+              </div>
+              <p class="tile-pitch">AI-assisted COBOL to C# modernization that proves every rewrite behaves identically.</p>
+              <ul class="tech" aria-label="Main technologies"><li>Python</li><li>FastAPI</li><li>Angular</li><li>C#/.NET</li><li>COBOL</li></ul>
+              <div class="tile-actions">
+                <button class="tile-open" type="button" aria-label="View more about Offshoot" hidden>View more</button>
+                <a class="tile-icon" href="https://offshoot-go2y.onrender.com" target="_blank" rel="noreferrer" aria-label="Offshoot live demo (opens in a new tab)" title="Live demo"><svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></a>
+                <a class="tile-icon" href="https://github.com/ved-cmpt/offshoot" target="_blank" rel="noreferrer" aria-label="Offshoot on GitHub (opens in a new tab)" title="GitHub"><svg class="icon-fill" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+              </div>
+              <div class="project-detail">
+                <dl class="detail-meta">
+                  <div><dt>My role</dt><dd>Solo project: wrote the full implementation blueprint (requirements, architecture, data model, API contract, security rules, test plan), directed AI-assisted implementation across six runs with strict acceptance criteria, made 50 recorded architecture decisions, found and fixed production bugs, and deployed it (Render + Neon).</dd></div>
+                  <div><dt>Dates</dt><dd>Nov 2026</dd></div>
+                  <div><dt>Status</dt><dd>Released (v1.0.0), with a live public demo</dd></div>
+                </dl>
+                <div class="detail-actions">
+                  <a class="button" href="https://offshoot-go2y.onrender.com" target="_blank" rel="noreferrer">Live demo ↗</a>
+                  <a class="button button--quiet" href="https://github.com/ved-cmpt/offshoot" target="_blank" rel="noreferrer">GitHub ↗</a>
+                </div>
+                <p class="detail-links"><a href="https://github.com/ved-cmpt/offshoot/releases/tag/v1.0.0" target="_blank" rel="noreferrer">Release v1.0.0 ↗</a><a href="https://github.com/ved-cmpt/offshoot/blob/main/docs/EVALUATION.md" target="_blank" rel="noreferrer">Evaluation ↗</a></p>
+                <div class="demo-box">
+                  <h4>Try the demo</h4>
+                  <table class="demo-logins">
+                    <thead><tr><th scope="col">Username</th><th scope="col">Can</th></tr></thead>
+                    <tbody>
+                      <tr><td><code>viewer</code></td><td>Browse everything, read-only</td></tr>
+                      <tr><td><code>engineer</code></td><td>Also run analysis and rule extraction</td></tr>
+                      <tr><td><code>architect</code></td><td>Also verify rules and approve modules and plans</td></tr>
+                      <tr><td><code>admin</code></td><td>Read the audit log and the user list</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="demo-password">Password for every account: <code>demo1234</code></p>
+                  <ul class="demo-notes">
+                    <li>The public demo runs mock AI responses and shows results from stored runs. It never compiles or runs code, and it resets every 24 hours.</li>
+                    <li>All data is synthetic.</li>
+                    <li>It runs on free hosting, so the first load after idle can take up to about a minute.</li>
+                  </ul>
+                </div>
+                <h4>Problem</h4>
+                <p>Governments, utilities, and other large organizations still run core systems such as billing and benefits on decades-old COBOL, whose business rules exist only in the code while its experts retire. AI can rewrite legacy code quickly, but a rewrite that silently changes a rounding or date rule can bill thousands of people incorrectly. Offshoot modernizes with AI while proving the new code behaves exactly like the old code, and keeps people in control of every approval.</p>
+                <h4>Key features</h4>
+                <ul class="impact">
+                  <li><strong>Deterministic COBOL analysis:</strong> copybook expansion, call graph, data layouts, and dead-code detection, with no AI involved.</li>
+                  <li><strong>AI business-rule extraction</strong> where every rule must cite exact source lines. Hallucinated or unsupported rules are flagged and cannot be verified until a person fixes them.</li>
+                  <li><strong>AI migration</strong> of each COBOL module to C#, built and unit-tested in a network-less sandbox that blocks processes, networking, the file system, and reflection, with up to 3 repair attempts.</li>
+                  <li><strong>Golden-master equivalence:</strong> 500 seeded cases per module run through the real COBOL (GnuCOBOL) and the new C#, compared field by field, plus paragraph coverage and Stryker.NET mutation testing.</li>
+                  <li><strong>Five server-side gates</strong> and architect-only approval. The AI model can never approve anything.</li>
+                  <li><strong>Strangler-fig facade</strong> (YARP) that routes each module through legacy, shadow, and modern modes, plus an append-only audit log of every AI call and human decision.</li>
+                </ul>
+                <h4>Results</h4>
+                <ul class="impact">
+                  <li><strong>Rounding defect caught:</strong> the first C# rate calculator passed its own unit tests but matched only <strong>484 of 500</strong> cases. Each of the 16 mismatches was one cent, because C# rounded half a cent to the even cent (banker's rounding) where COBOL rounds half up. The module was blocked, and after one repair it matched <strong>500 of 500</strong>.</li>
+                  <li>All <strong>4</strong> migrated modules verified at <strong>500 of 500</strong> equivalent cases, with mutation scores of <strong>78.75%–88.64%</strong> and paragraph coverage of <strong>93.33%–100%</strong>.</li>
+                  <li>Shadow mode compared <strong>20</strong> requests with <strong>0</strong> mismatches before promotion to the C# module.</li>
+                  <li>Rule extraction in the mock pipeline: <strong>95.65%</strong> precision and <strong>88.00%</strong> recall, with both planted hallucinations caught.</li>
+                  <li><strong>Live Gemini, small samples:</strong> rule extraction on 2 programs reached <strong>93.33%</strong> precision, <strong>63.64%</strong> recall, and 100% valid source spans. A live migration of one module (RATECALC) compiled on the first try and matched <strong>500 of 500</strong> cases with a 93.94% mutation score, with no repair needed.</li>
+                  <li>The prompt-injection comment was never obeyed, and the model made <strong>0</strong> approvals. Production smoke tests on the live site: <strong>14 of 14</strong> passed.</li>
+                </ul>
+                <p class="detail-note">All results come from a synthetic COBOL billing system. Real-world users and cost savings were not measured.</p>
+                <h4>Screenshots</h4>
+                <div class="detail-shots">
+                  <figure>
+                    <a href="assets/projects/offshoot/rounding-defect.webp" target="_blank" rel="noreferrer"><img src="assets/projects/offshoot/rounding-defect.webp" alt="Offshoot verification report for the rate calculator: 484 of 500 cases identical, marked Did not pass, with one-cent differences between the legacy and modern values listed field by field." width="992" height="780" loading="lazy" decoding="async"></a>
+                    <figcaption>The first C# rate calculator, blocked at 484 of 500 identical cases.</figcaption>
+                  </figure>
+                  <figure>
+                    <a href="assets/projects/offshoot/verified-module.webp" target="_blank" rel="noreferrer"><img src="assets/projects/offshoot/verified-module.webp" alt="Offshoot module page for MTRVAL: all five gates pass (build, unit tests, 100% equivalence, 100% paragraph coverage, and a 78.75% mutation score), with architect approval and routing to the modern module after 20 shadow comparisons with 0 mismatches." width="1280" height="812" loading="lazy" decoding="async"></a>
+                    <figcaption>A verified module: every gate passed, then shadow mode and promotion.</figcaption>
+                  </figure>
+                  <figure>
+                    <a href="assets/projects/offshoot/overview.webp" target="_blank" rel="noreferrer"><img src="assets/projects/offshoot/overview.webp" alt="Offshoot project overview for the synthetic billing system: module states, rules verified, equivalent cases across modules, and a table of identical cases, coverage, and mutation score for each module." width="1280" height="880" loading="lazy" decoding="async"></a>
+                    <figcaption>The project overview, read from stored runs.</figcaption>
+                  </figure>
+                </div>
+                <h4>Architecture flow</h4>
+                <div class="detail-flow">
+                  <div>
+                    <ol>
+                      <li>A user works in the Angular UI.</li>
+                      <li>The FastAPI orchestrator runs each step as a job.</li>
+                      <li>Deterministic COBOL analysis builds the inventory, and the AI agent (Gemini or a mock) proposes rules, a plan, and C# code under strict contracts.</li>
+                      <li>Sandboxed runners build and run the code: GnuCOBOL for the legacy program, and a network-less .NET builder for the C#.</li>
+                      <li>The equivalence harness compares both on 500 seeded cases, and server-side gates decide what an architect can approve.</li>
+                      <li>PostgreSQL keeps every run and the append-only audit log, and the YARP strangler facade routes each module through legacy, shadow, and modern modes.</li>
+                    </ol>
+                    <p>The model proposes, deterministic tooling verifies, and people approve.</p>
+                  </div>
+                  <div class="diagram diagram--modal" aria-hidden="true"></div>
+                </div>
+                <h4>Testing &amp; quality</h4>
+                <ul class="impact">
+                  <li>About <strong>1,000</strong> automated tests: <strong>787</strong> pytest, <strong>163</strong> Angular (Vitest), <strong>26</strong> .NET (xUnit), <strong>18</strong> Playwright and axe browser journeys in both themes, and a <strong>14</strong>-test production smoke suite that also runs against the live site.</li>
+                  <li><strong>136</strong> characterization tests run the real COBOL against hand-computed expected values for each legacy quirk: half-up rounding, meter rollover, the two-digit-year window, truncation, and late-fee rules.</li>
+                  <li>The same seed produces a byte-identical equivalence report, and a test checks it.</li>
+                  <li>Sandbox attack tests: <strong>9 of 9</strong> hostile code samples fail the build, infinite loops hit the timeout, and a 4 GB allocation hits the memory limit.</li>
+                  <li>Prompt-injection and hallucination fixtures, and a test that proves the answer key never reaches the AI.</li>
+                  <li>GitHub Actions CI covers lint, strict types, dependency audits, a fresh-checkout Docker stack, a full-history secret scan, and a text-encoding check.</li>
+                </ul>
+                <p class="detail-subhead">Real bugs found and fixed</p>
+                <ul class="impact">
+                  <li>A zombie-process leak in the .NET sandbox (<strong>454</strong> processes against a limit of <strong>512</strong>) that caused misleading build failures.</li>
+                  <li>Login rate limits that silently never fired behind the hosting proxy.</li>
+                  <li>A corrupted character in the live banner, traced to its root cause, with a new CI check to prevent it.</li>
+                  <li>Gemini rejected the structured response schema, so <strong>17 of 20</strong> live calls failed. The schema moved into the prompt, with strict validation kept on the server.</li>
+                </ul>
+                <h4>Tech stack</h4>
+                <dl class="tech-groups">
+                  <div><dt>Languages</dt><dd><ul class="tech"><li>Python 3.12</li><li>TypeScript</li><li>C#</li><li>COBOL</li><li>SQL</li></ul></dd></div>
+                  <div><dt>Backend</dt><dd><ul class="tech"><li>FastAPI</li><li>Pydantic v2</li><li>SQLAlchemy 2</li><li>Alembic</li><li>Hypothesis</li></ul></dd></div>
+                  <div><dt>Frontend</dt><dd><ul class="tech"><li>Angular 22</li><li>SCSS</li></ul></dd></div>
+                  <div><dt>Target</dt><dd><ul class="tech"><li>.NET 10</li><li>ASP.NET Core</li><li>YARP</li><li>xUnit</li><li>Stryker.NET</li><li>Roslyn analyzers</li></ul></dd></div>
+                  <div><dt>Legacy</dt><dd><ul class="tech"><li>GnuCOBOL 3.2</li></ul></dd></div>
+                  <div><dt>Database</dt><dd><ul class="tech"><li>PostgreSQL</li><li>Neon</li></ul></dd></div>
+                  <div><dt>AI</dt><dd><ul class="tech"><li>Gemini API (gemini-3.5-flash)</li><li>Mock agent</li></ul></dd></div>
+                  <div><dt>Infrastructure</dt><dd><ul class="tech"><li>Docker</li><li>Docker Compose</li><li>GitHub Actions</li><li>Render</li></ul></dd></div>
+                  <div><dt>Quality</dt><dd><ul class="tech"><li>pytest</li><li>ruff</li><li>mypy</li><li>Vitest</li><li>Playwright</li><li>axe</li><li>gitleaks</li></ul></dd></div>
+                </dl>
+              </div>
+            </article>
+            <article class="project-tile reveal" data-diagram="iknow">
+              <div class="tile-top">
+                <h3>IknowServiceAI</h3>
+              </div>
+              <p class="tile-pitch">An AI-assisted IT service desk where the AI drafts cited answers and people approve sensitive ones.</p>
+              <ul class="tech" aria-label="Main technologies"><li>Python</li><li>FastAPI</li><li>React</li><li>PostgreSQL</li><li>Gemini API</li></ul>
+              <div class="tile-actions">
+                <button class="tile-open" type="button" aria-label="View more about IknowServiceAI" hidden>View more</button>
+                <a class="tile-icon" href="https://iknowserviceai.onrender.com" target="_blank" rel="noreferrer" aria-label="IknowServiceAI live demo (opens in a new tab)" title="Live demo"><svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></a>
+                <a class="tile-icon" href="https://github.com/ved-cmpt/iknowserviceai" target="_blank" rel="noreferrer" aria-label="IknowServiceAI on GitHub (opens in a new tab)" title="GitHub"><svg class="icon-fill" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+              </div>
+              <div class="project-detail">
+                <dl class="detail-meta">
+                  <div><dt>My role</dt><dd>Solo project: wrote the product blueprint and requirements, designed the architecture, directed AI-assisted implementation, tested every user journey, and deployed it (Render + Neon).</dd></div>
+                  <div><dt>Dates</dt><dd>Sep – Oct 2026</dd></div>
+                  <div><dt>Status</dt><dd>Released (v1.0.0), with a live public demo</dd></div>
+                </dl>
+                <div class="detail-actions">
+                  <a class="button" href="https://iknowserviceai.onrender.com" target="_blank" rel="noreferrer">Live demo ↗</a>
+                  <a class="button button--quiet" href="https://github.com/ved-cmpt/iknowserviceai" target="_blank" rel="noreferrer">GitHub ↗</a>
+                </div>
+                <p class="detail-links"><a href="https://github.com/ved-cmpt/iknowserviceai/releases/tag/v1.0.0" target="_blank" rel="noreferrer">Demo video, 86 s ↗</a><a href="https://github.com/ved-cmpt/iknowserviceai/releases/tag/v1.0.0" target="_blank" rel="noreferrer">Release v1.0.0 ↗</a><a href="https://github.com/ved-cmpt/iknowserviceai/blob/main/docs/EVALUATION.md" target="_blank" rel="noreferrer">Evaluation ↗</a></p>
+                <div class="demo-box">
+                  <h4>Try the demo</h4>
+                  <table class="demo-logins">
+                    <thead><tr><th scope="col">Sign in as</th><th scope="col">Role</th></tr></thead>
+                    <tbody>
+                      <tr><td><code>riley.morgan@demo.iknowservice.test</code></td><td>Requester</td></tr>
+                      <tr><td><code>sam.patel@demo.iknowservice.test</code></td><td>Requester</td></tr>
+                      <tr><td><code>alex.chen@demo.iknowservice.test</code></td><td>Support agent</td></tr>
+                      <tr><td><code>jordan.reyes@demo.iknowservice.test</code></td><td>Admin</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="demo-password">Password for every account: <code>demo-only-public-2026</code></p>
+                  <ul class="demo-notes">
+                    <li>The public demo runs the built-in mock AI, so it shows the workflow and its safety gates. Live Gemini results come from the evaluation and the demo video.</li>
+                    <li>All data is synthetic, shared, and reset daily.</li>
+                    <li>It runs on free hosting, so the first load after idle can take up to about a minute.</li>
+                  </ul>
+                </div>
+                <h4>Problem</h4>
+                <p>Small organizations and campus IT help desks receive repetitive, free-text support requests, and staff spend time interpreting them, looking up documentation, and drafting answers. Generative AI could help, but uncontrolled AI can invent procedures, mishandle sensitive cases, or leak private data. IknowServiceAI uses AI to triage requests and draft answers from a trusted knowledge base, while code-enforced rules make sure a person reviews sensitive requests first.</p>
+                <h4>Key features</h4>
+                <ul class="impact">
+                  <li><strong>AI triage</strong> of each request: category, priority, summary, and a suggested reply citing published knowledge-base articles, with every citation checked against what was actually retrieved.</li>
+                  <li><strong>A deterministic policy gate</strong> holds sensitive requests, such as account compromise or credential requests, for staff review. The AI cannot override it, and requesters see nothing until a person approves a reply.</li>
+                  <li><strong>Staff review workspace</strong> to approve, edit, or reject AI drafts, with an unsafe-reply check: a reply that asks for a password, for example, is refused.</li>
+                  <li><strong>Role-based access</strong> for requesters, support staff, and admins, plus an append-only audit trail of every decision.</li>
+                  <li><strong>Knowledge-base management</strong> with PostgreSQL full-text search, plus privacy redaction and prompt-injection defences.</li>
+                  <li><strong>Public demo mode</strong> with shared demo accounts, a daily data reset, and light and dark themes.</li>
+                </ul>
+                <h4>Results</h4>
+                <ul class="impact">
+                  <li>Held all <strong>22</strong> sensitive cases for review and produced <strong>zero</strong> invented citations on a <strong>43-case</strong> evaluation set; a live Gemini sample also held <strong>3 of 3</strong>.</li>
+                  <li>Mock mode on the same 43 cases: <strong>81.4%</strong> exact category accuracy.</li>
+                  <li><strong>Live Gemini, small 10-case sample:</strong> zero invented citations, with a median latency of about <strong>16 seconds</strong>.</li>
+                </ul>
+                <p class="detail-note">The first evaluation run held only 86.4% of sensitive cases. The patterns were then fixed, and the 100% figure is on the same set used to tune them, so it says little about new text.</p>
+                <h4>Screenshots</h4>
+                <div class="detail-shots">
+                  <figure>
+                    <a href="assets/projects/iknowserviceai/request-suggestion.webp" target="_blank" rel="noreferrer"><img src="assets/projects/iknowserviceai/request-suggestion.webp" alt="IknowServiceAI request page: an AI-generated suggestion, labelled to verify before acting, with numbered steps and a link to its knowledge-base source." width="1400" height="758" loading="lazy" decoding="async"></a>
+                    <figcaption>A requester sees a labelled AI suggestion with its source.</figcaption>
+                  </figure>
+                  <figure>
+                    <a href="assets/projects/iknowserviceai/review-workspace.webp" target="_blank" rel="noreferrer"><img src="assets/projects/iknowserviceai/review-workspace.webp" alt="IknowServiceAI staff review workspace for a held request: AI analysis with a confidence score, risk flags, and a citation, the read-only AI draft beside the reply to publish, and Approve and Reject buttons." width="1400" height="1463" loading="lazy" decoding="async"></a>
+                    <figcaption>Staff review a held, sensitive request before anything is published.</figcaption>
+                  </figure>
+                  <figure>
+                    <a href="assets/projects/iknowserviceai/support-queue.webp" target="_blank" rel="noreferrer"><img src="assets/projects/iknowserviceai/support-queue.webp" alt="IknowServiceAI support queue listing requests with status, priority, category, and assignment, with held requests highlighted for human review." width="1400" height="867" loading="lazy" decoding="async"></a>
+                    <figcaption>The support queue, with held requests highlighted.</figcaption>
+                  </figure>
+                </div>
+                <h4>Architecture flow</h4>
+                <div class="detail-flow">
+                  <div>
+                    <ol>
+                      <li>A user submits a request in the React UI.</li>
+                      <li>The FastAPI backend saves it, then redacts sensitive values such as emails, tokens, and keys.</li>
+                      <li>PostgreSQL full-text search retrieves published knowledge-base articles.</li>
+                      <li>The AI agent (Gemini or a built-in mock) proposes a category, priority, summary, and cited reply. Citations must match the retrieved, published articles.</li>
+                      <li>A deterministic policy gate holds any flagged request for staff, who approve, edit, or reject the draft.</li>
+                      <li>PostgreSQL (Neon) stores requests, replies, and the append-only audit trail.</li>
+                    </ol>
+                    <p>The model only proposes text. It has no tools, and application code validates and writes everything.</p>
+                  </div>
+                  <div class="diagram diagram--modal" aria-hidden="true"></div>
+                </div>
+                <h4>Testing &amp; quality</h4>
+                <ul class="impact">
+                  <li>In CI: <strong>876</strong> backend and <strong>242</strong> frontend tests, plus end-to-end browser suites of <strong>34</strong> tests on the development stack and <strong>46</strong> on the production Docker image.</li>
+                  <li><strong>172</strong> axe accessibility checks with no findings, in light and dark themes, at desktop and 375 px mobile widths.</li>
+                  <li>Security and adversarial tests: prompt injection, invented citation IDs, model attempts to skip review, cross-account access, duplicate or stale reviews, and rate limiting.</li>
+                  <li>Mutation-style checks: safety controls were deliberately broken to confirm the tests catch it.</li>
+                  <li>A 43-case evaluation set of ordinary, ambiguous, sensitive, and prompt-injection cases, plus a capped live Gemini sample.</li>
+                  <li>Verified on the live deployment: security headers, secure cookies, session persistence after reload, rate limiting through the host's proxy (which found and fixed a real proxy-configuration bug), and data persistence after a redeploy.</li>
+                  <li>Every user journey also tested by hand in the browser, locally and on the live site.</li>
+                </ul>
+                <h4>Tech stack</h4>
+                <dl class="tech-groups">
+                  <div><dt>Languages</dt><dd><ul class="tech"><li>Python</li><li>JavaScript</li></ul></dd></div>
+                  <div><dt>Frontend</dt><dd><ul class="tech"><li>React</li><li>Vite</li><li>React Router</li><li>Plain CSS design system</li></ul></dd></div>
+                  <div><dt>Backend</dt><dd><ul class="tech"><li>FastAPI</li><li>Pydantic</li><li>SQLAlchemy 2</li><li>Alembic</li><li>psycopg</li><li>Argon2id</li><li>JWT with rotating HttpOnly refresh cookies</li></ul></dd></div>
+                  <div><dt>AI</dt><dd><ul class="tech"><li>Gemini API (gemini-3.5-flash-lite)</li><li>Mock agent</li></ul></dd></div>
+                  <div><dt>Database</dt><dd><ul class="tech"><li>PostgreSQL full-text search</li><li>Neon</li></ul></dd></div>
+                  <div><dt>Testing</dt><dd><ul class="tech"><li>pytest</li><li>Vitest</li><li>React Testing Library</li><li>Playwright</li><li>axe</li></ul></dd></div>
+                  <div><dt>DevOps</dt><dd><ul class="tech"><li>Docker</li><li>Docker Compose</li><li>GitHub Actions</li><li>gitleaks</li><li>Dependabot</li><li>Render</li></ul></dd></div>
+                </dl>
+              </div>
+            </article>
+            <article class="project-tile reveal" data-diagram="claimwillow">
+              <div class="tile-top">
+                <h3>ClaimWillow</h3>
+              </div>
+              <p class="tile-pitch">A home-contents insurance claims workflow with explainable rule checks, an audit trail, and automated testing.</p>
+              <ul class="tech" aria-label="Main technologies"><li>Java</li><li>Spring Boot</li><li>React</li><li>TypeScript</li><li>PostgreSQL</li></ul>
+              <div class="tile-actions">
+                <button class="tile-open" type="button" aria-label="View more about ClaimWillow" hidden>View more</button>
+                <a class="tile-icon" href="https://claimwillow.onrender.com" target="_blank" rel="noreferrer" aria-label="ClaimWillow live demo (opens in a new tab)" title="Live demo"><svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></a>
+                <a class="tile-icon" href="https://github.com/ved-cmpt/ClaimWillow" target="_blank" rel="noreferrer" aria-label="ClaimWillow on GitHub (opens in a new tab)" title="GitHub"><svg class="icon-fill" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+              </div>
+              <div class="project-detail">
+                <dl class="detail-meta">
+                  <div><dt>My role</dt><dd>Solo project: designed the architecture and full specification, directed AI-assisted implementation, reviewed and tested the code, and deployed it to production (Render + Neon).</dd></div>
+                  <div><dt>Dates</dt><dd>Oct – Nov 2026</dd></div>
+                  <div><dt>Status</dt><dd>Released (v1.0.0), with a live public demo</dd></div>
+                </dl>
+                <div class="detail-actions">
+                  <a class="button" href="https://claimwillow.onrender.com" target="_blank" rel="noreferrer">Live demo ↗</a>
+                  <a class="button button--quiet" href="https://github.com/ved-cmpt/ClaimWillow" target="_blank" rel="noreferrer">GitHub ↗</a>
+                </div>
+                <p class="detail-links"><a href="https://github.com/ved-cmpt/ClaimWillow/releases/tag/v1.0.0" target="_blank" rel="noreferrer">Release v1.0.0 ↗</a></p>
+                <div class="demo-box">
+                  <h4>Try the demo</h4>
+                  <table class="demo-logins">
+                    <thead><tr><th scope="col">Username</th><th scope="col">Role</th></tr></thead>
+                    <tbody>
+                      <tr><td><code>priya</code></td><td>Policyholder</td></tr>
+                      <tr><td><code>marcus</code></td><td>Policyholder</td></tr>
+                      <tr><td><code>dana</code></td><td>Claims adjuster</td></tr>
+                      <tr><td><code>sam</code></td><td>Claims adjuster</td></tr>
+                      <tr><td><code>admin</code></td><td>Administrator</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="demo-password">Password for every account: <code>demo1234</code></p>
+                  <ul class="demo-notes">
+                    <li>All data is synthetic, and the demo data may be reset at any time. It is not a real claims system.</li>
+                    <li>It runs on free hosting, so the first load after idle can take up to about a minute.</li>
+                  </ul>
+                </div>
+                <h4>Problem</h4>
+                <p>Home-contents insurance claims for damaged or lost belongings need a clear path from submission to decision. Policyholders need to see where their claim stands, and adjusters need consistent, explainable checks with a full record of who did what. ClaimWillow models this workflow for a fictional insurer, using synthetic data, as a demonstration of enterprise workflow design and layered test automation.</p>
+                <h4>Key features</h4>
+                <ul class="impact">
+                  <li><strong>Policyholder claim intake:</strong> save drafts, submit against an active policy, and keep a snapshot of the policy's coverage limit, deductible, and period taken at submission.</li>
+                  <li><strong>Six deterministic validation rules (R1–R6):</strong> required inputs, policy active on the incident date, estimate against the coverage limit, deductible, potential duplicates, and completeness. Each finding is stored and explained in plain language.</li>
+                  <li><strong>Adjuster queue and review lifecycle:</strong> assign, start review, request more information, policyholder response, approve or reject, and close. Illegal transitions are rejected.</li>
+                  <li><strong>Safe concurrent editing:</strong> optimistic locking returns HTTP 409 on conflicting updates.</li>
+                  <li><strong>An append-only audit timeline</strong> for every important action, plus private evidence uploads (PDF, PNG, or JPEG, with type and size checks and role-checked downloads).</li>
+                  <li><strong>Staff reporting</strong> with CSV export, and admin user management to enable or disable accounts.</li>
+                </ul>
+                <h4>Results</h4>
+                <ul class="impact">
+                  <li>All <strong>10</strong> browser acceptance scenarios from the specification pass (<strong>96</strong> steps), and CI is green on main.</li>
+                  <li>Latest CI on main: <strong>75</strong> backend unit, <strong>60</strong> backend integration, and <strong>30</strong> frontend tests, all passing.</li>
+                  <li>A concurrency test confirms that only <strong>1 of 6</strong> simultaneous assignments succeeds; the others get a clear conflict response.</li>
+                  <li>Deployed and working at <strong>$0</strong> hosting cost on Render and Neon.</li>
+                </ul>
+                <h4>Screenshots</h4>
+                <div class="detail-shots">
+                  <figure>
+                    <a href="assets/projects/claimwillow/staff-review.webp" target="_blank" rel="noreferrer"><img src="assets/projects/claimwillow/staff-review.webp" alt="ClaimWillow adjuster view of a claim in review: automated checks R3 (estimate over the coverage limit) and R6 (completeness) explained in plain language, beside review actions to request information or record a decision." width="1400" height="805" loading="lazy" decoding="async"></a>
+                    <figcaption>An adjuster reviews a claim, with each rule finding explained.</figcaption>
+                  </figure>
+                  <figure>
+                    <a href="assets/projects/claimwillow/claim-detail.webp" target="_blank" rel="noreferrer"><img src="assets/projects/claimwillow/claim-detail.webp" alt="ClaimWillow policyholder view of a submitted claim: its status, automated checks, a summary of the incident and estimate, and the policy snapshot taken at submission." width="1400" height="749" loading="lazy" decoding="async"></a>
+                    <figcaption>The policyholder's view, with the policy snapshot taken at submission.</figcaption>
+                  </figure>
+                  <figure>
+                    <a href="assets/projects/claimwillow/work-queue.webp" target="_blank" rel="noreferrer"><img src="assets/projects/claimwillow/work-queue.webp" alt="ClaimWillow adjuster work queue with counts of new, in-review, and needs-info claims, search filters, and a list of claims with status, adjuster, estimate, and dates." width="1400" height="745" loading="lazy" decoding="async"></a>
+                    <figcaption>The adjuster's work queue.</figcaption>
+                  </figure>
+                </div>
+                <h4>Architecture flow</h4>
+                <div class="detail-flow">
+                  <div>
+                    <ol>
+                      <li>A policyholder, adjuster, or admin uses the React and TypeScript UI.</li>
+                      <li>The Spring Boot REST API authenticates with a server-side session and checks a CSRF token on every change.</li>
+                      <li>Claim services run the review state machine and rules R1–R6, and record audit events in the same transaction.</li>
+                      <li>JPA and Flyway map and migrate the data in PostgreSQL (Neon in production).</li>
+                    </ol>
+                    <p>One Docker container on Render serves both the UI and the API.</p>
+                  </div>
+                  <div class="diagram diagram--modal" aria-hidden="true"></div>
+                </div>
+                <h4>Testing &amp; quality</h4>
+                <ul class="impact">
+                  <li>Backend unit tests (JUnit 5 and Mockito) for the rules, money calculations with BigDecimal, and state transitions.</li>
+                  <li>Integration tests against a real PostgreSQL in Docker (Testcontainers): migrations, the claim lifecycle, 401/403/404 access boundaries, CSRF enforcement, a concurrent-assignment race, transaction rollback on a database failure, attachment authorization, and CSV export.</li>
+                  <li>Frontend tests (Vitest and React Testing Library) for forms, validation messages, and role-specific actions.</li>
+                  <li><strong>10</strong> browser acceptance scenarios (Cucumber and Selenium in headless Chrome), with screenshots captured on failure.</li>
+                  <li>GitHub Actions CI on every pull request, with a protected main branch that requires CI to pass. The production Docker image was smoke-tested under a <strong>512 MB</strong> memory limit.</li>
+                  <li>Checked by hand locally and on the live site: logins for each role, policies, claims, and a submitted claim showing its rule findings and history.</li>
+                </ul>
+                <h4>Tech stack</h4>
+                <dl class="tech-groups">
+                  <div><dt>Languages</dt><dd><ul class="tech"><li>Java 21</li><li>TypeScript</li></ul></dd></div>
+                  <div><dt>Backend</dt><dd><ul class="tech"><li>Spring Boot 4.1.2</li><li>Spring Security (sessions, CSRF, BCrypt)</li><li>Spring Data JPA</li><li>Flyway</li></ul></dd></div>
+                  <div><dt>Frontend</dt><dd><ul class="tech"><li>React</li><li>Vite</li><li>Tailwind CSS</li></ul></dd></div>
+                  <div><dt>Database</dt><dd><ul class="tech"><li>PostgreSQL 16</li><li>Neon</li></ul></dd></div>
+                  <div><dt>Testing</dt><dd><ul class="tech"><li>JUnit 5</li><li>Mockito</li><li>Testcontainers</li><li>Vitest</li><li>React Testing Library</li><li>Selenium</li><li>Cucumber</li></ul></dd></div>
+                  <div><dt>DevOps</dt><dd><ul class="tech"><li>Docker</li><li>Docker Compose</li><li>GitHub Actions</li><li>Dependabot</li><li>Maven</li><li>npm</li><li>Render</li></ul></dd></div>
+                </dl>
+              </div>
+            </article>
             <article class="project-tile reveal" data-diagram="duck">
               <div class="tile-top">
                 <h3>Duck Duck Defer</h3>
@@ -305,7 +642,9 @@
               </div>
               <p class="tile-pitch">An AI-integrated Android app that manages deferred university exams for students, faculty, and administrators.</p>
               <ul class="tech" aria-label="Main technologies"><li>Kotlin</li><li>Jetpack Compose</li><li>Firebase</li><li>Gemini API</li></ul>
-              <button class="tile-open" type="button" aria-label="View more about Duck Duck Defer" hidden>View more</button>
+              <div class="tile-actions">
+                <button class="tile-open" type="button" aria-label="View more about Duck Duck Defer" hidden>View more</button>
+              </div>
               <div class="project-detail">
                 <dl class="detail-meta">
                   <div><dt>My role</dt><dd>Frontend Software Developer / Business Analyst</dd></div>
@@ -352,58 +691,15 @@
                 <ul class="tech" aria-label="Full tech stack"><li>Kotlin</li><li>Jetpack Compose</li><li>Material Design 3</li><li>Node.js</li><li>Firebase Authentication</li><li>Cloud Firestore</li><li>Cloud Functions</li><li>Cloud Storage</li><li>Cloud Messaging</li><li>Gemini API</li><li>REST APIs</li><li>Android Studio</li><li>Gradle</li><li>Git/GitHub</li><li>JUnit</li><li>AndroidX Testing</li><li>ArchUnit</li></ul>
               </div>
             </article>
-            <article class="project-tile reveal" data-diagram="iknow">
-              <div class="tile-top">
-                <h3>IknowServiceAI</h3>
-              </div>
-              <p class="tile-pitch">A full-stack AI service request agent for classification, knowledge retrieval, and recommendations, with human-in-the-loop approvals.</p>
-              <ul class="tech" aria-label="Main technologies"><li>Python</li><li>FastAPI</li><li>React</li><li>PostgreSQL</li><li>Gemini API</li></ul>
-              <button class="tile-open" type="button" aria-label="View more about IknowServiceAI" hidden>View more</button>
-              <div class="project-detail">
-                <dl class="detail-meta">
-                  <div><dt>My role</dt><dd>Full-stack development, Gemini API integration, and testing</dd></div>
-                </dl>
-                <h4>Problem</h4>
-                <p>Service requests are often written in free-form language and need manual interpretation, classification, information lookup, and decisions, which is repetitive and hard to standardize.</p>
-                <h4>Features</h4>
-                <ul class="impact">
-                  <li><strong>AI-assisted classification</strong> of service requests with the Gemini API.</li>
-                  <li><strong>Knowledge retrieval</strong> relevant to each request, and <strong>intelligent recommendations</strong> built on it.</li>
-                  <li><strong>React frontend</strong> connected to Python and FastAPI <strong>REST API microservices</strong>.</li>
-                  <li><strong>PostgreSQL</strong> and SQL for relational persistence.</li>
-                  <li><strong>Responsible AI workflow:</strong> AI governance, privacy safeguards, human-in-the-loop approvals, and audit logging.</li>
-                </ul>
-                <h4>Request flow</h4>
-                <div class="detail-flow">
-                  <div>
-                    <ol>
-                      <li>A user submits a request in the React interface.</li>
-                      <li>The frontend sends it to a FastAPI service.</li>
-                      <li>Gemini supports interpretation and classification.</li>
-                      <li>The system retrieves relevant knowledge and supports recommendations.</li>
-                      <li>Where applicable, humans review or approve AI-assisted actions.</li>
-                      <li>PostgreSQL stores application data, and audit logging captures activity.</li>
-                      <li>The backend returns the result for the frontend to display.</li>
-                    </ol>
-                    <p>This is a conceptual view of the documented features, not an endpoint-by-endpoint trace.</p>
-                  </div>
-                  <div class="diagram diagram--modal" aria-hidden="true"></div>
-                </div>
-                <h4>Testing</h4>
-                <p>Automated unit and integration tests with pytest, plus debugging of frontend and backend integrations. Services are containerized with Docker.</p>
-                <h4>My contributions</h4>
-                <p>I developed the full-stack application with React, FastAPI, and PostgreSQL, integrated Gemini for classification, knowledge retrieval, and recommendations, incorporated AI governance, privacy safeguards, approvals, and audit logging, implemented pytest unit and integration tests, and containerized the services with Docker.</p>
-                <h4>Tech</h4>
-                <ul class="tech" aria-label="Full tech stack"><li>Python</li><li>FastAPI</li><li>React</li><li>JavaScript</li><li>PostgreSQL</li><li>SQL</li><li>Gemini API</li><li>REST APIs</li><li>Docker</li><li>pytest</li><li>Git/GitHub</li></ul>
-              </div>
-            </article>
             <article class="project-tile reveal" data-diagram="movie">
               <div class="tile-top">
                 <h3>Movie Rental Database Management System</h3>
               </div>
               <p class="tile-pitch">A C#/.NET Windows Forms application backed by a relational SQL database for rentals, inventory, and reporting.</p>
               <ul class="tech" aria-label="Main technologies"><li>C#</li><li>.NET</li><li>SQL</li><li>Windows Forms</li></ul>
-              <button class="tile-open" type="button" aria-label="View more about Movie Rental Database Management System" hidden>View more</button>
+              <div class="tile-actions">
+                <button class="tile-open" type="button" aria-label="View more about Movie Rental Database Management System" hidden>View more</button>
+              </div>
               <div class="project-detail">
                 <dl class="detail-meta">
                   <div><dt>My role</dt><dd>Database design, SQL queries, C#/.NET integration, and testing</dd></div>
@@ -445,7 +741,9 @@
               </div>
               <p class="tile-pitch">A Unity tower-defense game that combines gameplay with financial-literacy quizzes and progression.</p>
               <ul class="tech" aria-label="Main technologies"><li>C#</li><li>Unity</li></ul>
-              <button class="tile-open" type="button" aria-label="View more about Tower of Finance" hidden>View more</button>
+              <div class="tile-actions">
+                <button class="tile-open" type="button" aria-label="View more about Tower of Finance" hidden>View more</button>
+              </div>
               <div class="project-detail">
                 <dl class="detail-meta">
                   <div><dt>My role</dt><dd>Gameplay systems, program logic, and interface components</dd></div>
@@ -497,10 +795,10 @@
             <h2 id="skills-title">Skills</h2>
           </header>
           <div class="skill-groups reveal">
-            <div class="skill-group"><h3>Programming &amp; Development</h3><ul class="chips"><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/python/python-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Python</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/csharp/csharp-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">C#</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/dot-net/dot-net-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">.NET</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/javascript/javascript-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">JavaScript</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/kotlin/kotlin-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Kotlin</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/nodejs/nodejs-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Node.js</li><li>SQL</li><li>REST APIs</li><li>Object-Oriented Programming (OOP)</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/react/react-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">React</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/jetpackcompose/jetpackcompose-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Jetpack Compose</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/unity/unity-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Unity</li></ul></div>
+            <div class="skill-group"><h3>Programming &amp; Development</h3><ul class="chips"><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/python/python-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Python</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/java/java-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Java</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/csharp/csharp-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">C#</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/dot-net/dot-net-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">.NET</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/javascript/javascript-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">JavaScript</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/typescript/typescript-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">TypeScript</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/kotlin/kotlin-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Kotlin</li><li>COBOL</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/nodejs/nodejs-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Node.js</li><li>SQL</li><li>REST APIs</li><li>Object-Oriented Programming (OOP)</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/react/react-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">React</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/angular.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Angular</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/jetpackcompose/jetpackcompose-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Jetpack Compose</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/unity/unity-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Unity</li></ul></div>
             <div class="skill-group"><h3>AI, Machine Learning &amp; Automation</h3><ul class="chips"><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/googlegemini.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Gemini API</li><li>Generative AI</li><li>NLP</li><li>TF-IDF</li><li>K-Means Clustering</li><li>Regression</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/python/python-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Python Automation</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/pandas/pandas-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Pandas</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/numpy/numpy-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">NumPy</li></ul></div>
-            <div class="skill-group"><h3>Backend, Databases &amp; Cloud</h3><ul class="chips"><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/fastapi/fastapi-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">FastAPI</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/postgresql/postgresql-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">PostgreSQL</li><li>Relational Database Design</li><li>CRUD Operations</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/firebase/firebase-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Firebase Authentication</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/firebase/firebase-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Cloud Firestore</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/firebase/firebase-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Cloud Functions</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/firebase/firebase-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Cloud Messaging</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/docker/docker-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Docker</li></ul></div>
-            <div class="skill-group"><h3>Software Engineering &amp; Tools</h3><ul class="chips"><li>SDLC</li><li>Agile/Scrum</li><li>Unit &amp; Integration Testing</li><li>Debugging</li><li>Defect Resolution</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/junit/junit-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">JUnit</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/android/android-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">AndroidX Testing</li><li>ArchUnit</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/pytest/pytest-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">pytest</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/git/git-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Git/GitHub</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/gradle/gradle-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Gradle</li><li>OpenPyXL</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/powerbi.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Power BI</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/tableau.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Tableau</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/plotly/plotly-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Plotly</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/microsoftexcel.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Microsoft Excel</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/figma/figma-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Figma</li><li>Privacy-Aware Design</li><li>Technical Documentation</li></ul></div>
+            <div class="skill-group"><h3>Backend, Databases &amp; Cloud</h3><ul class="chips"><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/fastapi/fastapi-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">FastAPI</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/springboot.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Spring Boot</li><li>ASP.NET Core</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/postgresql/postgresql-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">PostgreSQL</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/sqlalchemy/sqlalchemy-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">SQLAlchemy</li><li>Relational Database Design</li><li>CRUD Operations</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/firebase/firebase-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Firebase Authentication</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/firebase/firebase-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Cloud Firestore</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/firebase/firebase-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Cloud Functions</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/firebase/firebase-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Cloud Messaging</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/docker/docker-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Docker</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/render.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Render</li><li>Neon</li></ul></div>
+            <div class="skill-group"><h3>Software Engineering &amp; Tools</h3><ul class="chips"><li>SDLC</li><li>Agile/Scrum</li><li>Unit &amp; Integration Testing</li><li>Debugging</li><li>Defect Resolution</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/junit/junit-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">JUnit</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/android/android-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">AndroidX Testing</li><li>ArchUnit</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/pytest/pytest-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">pytest</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/vitest/vitest-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Vitest</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/playwright/playwright-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Playwright</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/selenium/selenium-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Selenium</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/cucumber/cucumber-plain.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Cucumber</li><li>Testcontainers</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/git/git-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Git/GitHub</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/githubactions/githubactions-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">GitHub Actions</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/gradle/gradle-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Gradle</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/maven/maven-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Maven</li><li>OpenPyXL</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/powerbi.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Power BI</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/tableau.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Tableau</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/plotly/plotly-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Plotly</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@9.21.0/icons/microsoftexcel.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Microsoft Excel</li><li><img class="chip-icon" src="https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/figma/figma-original.svg" alt="" width="18" height="18" loading="lazy" decoding="async">Figma</li><li>Privacy-Aware Design</li><li>Technical Documentation</li></ul></div>
           </div>
           <nav class="view-pager" aria-label="Previous and next section">
             <a class="pager-link pager-prev" href="#projects" aria-label="Previous: Projects">← Previous</a>

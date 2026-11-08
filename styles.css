@@ -157,8 +157,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .skip-link:focus { top: 8px; }
 
 /* Text links must look like links everywhere: blue, underlined, and a different colour on hover */
-.side-links a, .note a, .email-link, .contact-links a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-.side-links a:hover, .note a:hover, .email-link:hover, .contact-links a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+.side-links a, .note a, .email-link, .contact-links a, .detail-links a { color: var(--link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.side-links a:hover, .note a:hover, .email-link:hover, .contact-links a:hover, .detail-links a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
 
 /* Sidebar */
 .sidebar { position: sticky; z-index: 20; top: 0; height: 100vh; height: 100svh; overflow-y: auto; display: flex; flex-direction: column; background: var(--sidebar-bg); border-right: 1px solid var(--sidebar-line); }
@@ -295,17 +295,24 @@ html:not(.js) .project-grid { grid-template-columns: minmax(0, 1fr); }
 .tile-pitch { margin-top: 12px; color: var(--muted); font-size: .94rem; line-height: 1.65; }
 .tech { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
 .tech li { padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong); font-family: var(--mono); font-size: .74rem; line-height: 1.7; }
-.tile-open { align-self: flex-start; min-height: 44px; margin-top: auto; padding: 0 18px; border: 1px solid var(--accent); border-radius: 8px; background: transparent; color: var(--accent-strong); font: inherit; font-size: .9rem; font-weight: 500; cursor: pointer; }
+/* "View more", plus small icon links to the live demo and GitHub where a project has them */
+.tile-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: auto; }
+.tile-icon { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; color: var(--accent-strong); text-decoration: none; }
+.tile-icon:hover { border-color: var(--accent); background: var(--accent-soft); }
+.tile-icon svg { width: 19px; height: 19px; }
+svg.icon-stroke { fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+svg.icon-fill { fill: currentColor; }
+.tile-open { min-height: 44px; padding: 0 18px; border: 1px solid var(--accent); border-radius: 8px; background: transparent; color: var(--accent-strong); font: inherit; font-size: .9rem; font-weight: 500; cursor: pointer; }
 .tile-open:hover { background: var(--accent); color: var(--on-accent); }
 .tile-open[hidden] { display: none; }
-.tech:has(+ .tile-open) { margin-bottom: 22px; }
+.tech:has(+ .tile-actions) { margin-bottom: 22px; }
 .note { margin-top: 36px; font-size: .96rem; font-weight: 500; }
 
 /* Project details. With JavaScript they only show in the dialog; without it, in the tile. */
 .js .project-detail { display: none; }
 html:not(.js) .project-detail { margin-top: 28px; padding-top: 4px; border-top: 1px solid var(--line); }
 .project-detail h4 { margin-top: 30px; font-size: 1.02rem; font-weight: 600; line-height: 1.4; }
-.project-detail h4 + p, .project-detail h4 + .impact, .project-detail h4 + .tech { margin-top: 10px; }
+.project-detail h4 + p, .project-detail h4 + .impact, .project-detail h4 + .tech, .project-detail h4 + .tech-groups, .project-detail h4 + .detail-shots { margin-top: 10px; }
 .project-detail p, .project-detail ol { font-size: .95rem; line-height: 1.7; }
 .detail-meta { display: grid; gap: 12px; margin-top: 22px; padding: 16px 18px; border-radius: 10px; background: var(--accent-soft); }
 .detail-meta dt { color: var(--muted); font-family: var(--mono); font-size: .74rem; font-weight: 500; }
@@ -316,6 +323,40 @@ html:not(.js) .project-detail { margin-top: 28px; padding-top: 4px; border-top: 
 .detail-flow li + li { margin-top: 6px; }
 .detail-flow li::marker { color: var(--muted); }
 .modal-content .diagram--modal { position: relative; display: block; width: 240px; height: 440px; max-width: 100%; }
+
+/* Live demo and GitHub buttons, then smaller text links */
+.detail-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.detail-actions .button { min-height: 46px; padding: 0 20px; font-size: .95rem; }
+.project-detail .detail-links { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-top: 14px; font-size: .92rem; font-weight: 500; }
+.detail-links a { display: inline-flex; align-items: center; min-height: 32px; }
+.project-detail .detail-note { margin-top: 14px; color: var(--muted); font-size: .88rem; }
+.project-detail .detail-subhead { margin-top: 22px; font-weight: 600; }
+.detail-subhead + .impact { margin-top: 10px; }
+
+/* "Try the demo": the public demo accounts */
+.demo-box { margin-top: 26px; padding: 4px 22px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--page); }
+.project-detail .demo-box h4 { margin-top: 18px; }
+.demo-logins { width: 100%; margin-top: 12px; border-collapse: collapse; font-size: .9rem; line-height: 1.5; }
+.demo-logins th { padding: 0 14px 8px 0; color: var(--muted); font-family: var(--mono); font-size: .74rem; font-weight: 500; text-align: left; }
+.demo-logins td { padding: 8px 14px 8px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.demo-box code { font-family: var(--mono); font-size: .86rem; overflow-wrap: anywhere; }
+.project-detail .demo-password { margin-top: 14px; font-weight: 500; }
+.demo-notes { margin-top: 10px; padding-left: 18px; list-style: disc; color: var(--muted); font-size: .88rem; line-height: 1.6; }
+.demo-notes li + li { margin-top: 4px; }
+
+/* Screenshots, each opening full size in a new tab */
+.detail-shots { display: grid; gap: 26px; }
+.detail-shots figure { margin: 0; }
+.detail-shots a { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; }
+.detail-shots a:hover { border-color: var(--accent); }
+.detail-shots img { display: block; width: 100%; height: auto; }
+.detail-shots figcaption { margin-top: 8px; color: var(--muted); font-size: .86rem; line-height: 1.5; }
+
+/* Tech stack in labelled rows */
+.tech-groups > div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 4px 16px; padding-block: 10px; border-top: 1px solid var(--line); }
+.tech-groups > div:last-child { border-bottom: 1px solid var(--line); }
+.tech-groups dt { padding-top: 2px; color: var(--muted); font-family: var(--mono); font-size: .76rem; font-weight: 500; }
+.tech-groups .tech { margin-top: 0; }
 
 /* Project dialog: a tall rounded panel. Its inner part scrolls so the corners stay clean. */
 /* While it is open the scrollbar space is released so the dimmed overlay reaches the window edge.
@@ -423,7 +464,7 @@ html.has-code-cursor :is(input, textarea, select, [contenteditable]) { cursor: a
 
   /* The bar slides to the current section */
   .nav-indicator { transition: transform 320ms cubic-bezier(.3, .7, .3, 1), height 320ms ease, opacity 200ms ease; }
-  .button, .pager-link, .copy-button, .back-to-top, .theme-toggle, .site-nav a, .side-links a, .note a, .email-link, .contact-links a, .more-details summary, .tile-open, .modal-close { transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, opacity 200ms ease, visibility 200ms ease; }
+  .button, .pager-link, .copy-button, .back-to-top, .theme-toggle, .site-nav a, .side-links a, .note a, .email-link, .contact-links a, .more-details summary, .tile-open, .tile-icon, .detail-links a, .detail-shots a, .modal-close { transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, opacity 200ms ease, visibility 200ms ease; }
   .more-details summary::after { transition: transform 200ms ease, margin-top 200ms ease; }
 
   /* "More details" opens smoothly in browsers that support it, and instantly in others */
@@ -537,4 +578,6 @@ html.theme-fade, html.theme-fade * { transition: background-color 320ms ease, co
   .modal-body { padding: 20px 22px 32px; }
   .skill-group { grid-template-columns: minmax(0, 1fr); }
   .course-rows > div { grid-template-columns: minmax(0, 1fr); padding-block: 10px; }
+  .tech-groups > div { grid-template-columns: minmax(0, 1fr); }
+  .demo-box { padding-inline: 16px; }
 }
