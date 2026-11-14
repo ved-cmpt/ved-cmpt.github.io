@@ -96,12 +96,60 @@ panel.addEventListener("click", (event) => {
 document.addEventListener("click", (event) => {
   if (!header.contains(event.target)) setMenu(false);
 });
+/* Esc closes the menu first, then the site notice. The project dialog handles its own Esc. */
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && panel.classList.contains("is-open")) {
+  if (event.key !== "Escape") return;
+  if (panel.classList.contains("is-open")) {
     setMenu(false);
     menuButton.focus();
+  } else if (!modal.open) {
+    closeNotice();
   }
 });
+
+/* "This site may be outdated" notice: a small card in the corner when the site opens. Closing it
+   (× or Esc) keeps it closed for the rest of the visit, using sessionStorage. */
+const notice = document.querySelector("#site-notice");
+const NOTICE_KEY = "site-notice-closed";
+let noticeClosed = false;
+try {
+  noticeClosed = sessionStorage.getItem(NOTICE_KEY) === "1";
+} catch {
+  /* Storage can be blocked. The notice then shows on each page load. */
+}
+
+/* On phones the notice spans the bottom, so back to top moves up by its height */
+const measureNotice = () => root.style.setProperty("--notice-height", `${notice.offsetHeight}px`);
+
+function closeNotice() {
+  if (!notice.classList.contains("is-visible")) return;
+  const hadFocus = notice.contains(document.activeElement);
+  notice.classList.remove("is-visible");
+  root.classList.remove("notice-open");
+  try {
+    sessionStorage.setItem(NOTICE_KEY, "1");
+  } catch {
+    /* It still closes for now. */
+  }
+  if (hadFocus) {
+    const heading = document.getElementById(currentView).querySelector("h1, h2");
+    heading.tabIndex = -1;
+    heading.focus({ preventScroll: true });
+  }
+}
+
+if (noticeClosed) {
+  notice.hidden = true;
+} else {
+  const noticeClose = notice.querySelector(".notice-close");
+  noticeClose.hidden = false;
+  noticeClose.addEventListener("click", closeNotice);
+  setTimeout(() => {
+    notice.classList.add("is-visible");
+    root.classList.add("notice-open");
+    measureNotice();
+  }, reduceMotion ? 0 : 700);
+}
 
 /* Fade-up, once each time a view opens. Anything already scrolled past appears straight away. */
 const revealObserver = new IntersectionObserver((entries) => {
@@ -257,6 +305,7 @@ if (cursorAllowed) {
 window.addEventListener("scroll", requestUpdate, { passive: true });
 window.addEventListener("resize", () => {
   moveIndicator();
+  if (root.classList.contains("notice-open")) measureNotice();
   requestUpdate();
 });
 document.fonts?.ready.then(moveIndicator);
