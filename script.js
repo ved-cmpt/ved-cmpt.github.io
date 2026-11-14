@@ -747,6 +747,25 @@ modal.addEventListener("close", () => {
   modalOpener = null;
 });
 
+/* Skills: "Expand all" opens or closes every group. Its label follows the groups' state. */
+const skillsToggle = document.querySelector("#skills-toggle");
+const skillGroups = [...document.querySelectorAll(".skill-group")];
+const syncSkillsToggle = () => {
+  const allOpen = skillGroups.every((group) => group.open);
+  skillsToggle.textContent = allOpen ? "Collapse all" : "Expand all";
+  skillsToggle.setAttribute("aria-expanded", String(allOpen));
+};
+skillsToggle.hidden = false;
+syncSkillsToggle();
+skillsToggle.addEventListener("click", () => {
+  const open = !skillGroups.every((group) => group.open);
+  skillGroups.forEach((group) => {
+    group.open = open;
+  });
+  syncSkillsToggle();
+});
+skillGroups.forEach((group) => group.addEventListener("toggle", syncSkillsToggle));
+
 /* A logo that fails to load is removed, leaving just the label */
 document.addEventListener("error", (event) => {
   if (event.target.classList?.contains("chip-icon")) event.target.remove();
