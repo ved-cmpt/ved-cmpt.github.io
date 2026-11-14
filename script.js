@@ -261,7 +261,7 @@ window.addEventListener("resize", () => {
 });
 document.fonts?.ready.then(moveIndicator);
 
-/* Background: a small labelled diagram for each section and card, based on the résumé and Vedsai's supplied details, on the right only.
+/* Background: a small labelled diagram for each section and card, based on Vedsai's résumé and supplied details, on the right only.
    A simple flow lists its "steps" as [label, note]. Use "|" in a note for a second line.
    A custom diagram lists "nodes" as [x, y, type, label, note, side] and "edges" as [from, to, seconds, tone, shape].
    Add seconds to an edge to send a data dot along it, and "warm" to make that dot amber.
