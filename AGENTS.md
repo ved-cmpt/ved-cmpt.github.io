@@ -3,12 +3,13 @@
 This is Vedsai Vangapandu's job-application portfolio. Use the full name "Vedsai Vangapandu" everywhere on the site.
 
 ## Product goal
-A personal website, not a marketing site. Spacious and calm, never congested. A recruiter should understand each role and project in seconds, and find the résumé immediately. What matters most is biggest. Prefer evidence, projects, and measurable outcomes over decoration. The site is ready to publish, so never leave placeholder or filler text in it, including terminal-style labels such as `$ whoami` or `//` prefixes.
+A personal website, not a marketing site. Spacious and calm, never congested. A recruiter should understand each role and project in seconds. The site does not offer a résumé download: recruiters use the résumé Vedsai submitted with each application. What matters most is biggest. Prefer evidence, projects, and measurable outcomes over decoration. The site is ready to publish, so never leave placeholder or filler text in it, including terminal-style labels such as `$ whoami` or `//` prefixes.
 
 ## Layout
 - Desktop: a simple sticky left sidebar beside one main content column, with the theme toggle fixed in the top-right corner.
 - Sidebar, top to bottom: name, the tagline "AI & Software Developer", plain text nav with a sliding highlight bar, then the email and links at the bottom. No avatar and no icons. It is 240px wide with its own background (`--sidebar-bg`): a light blue tint in light mode and a slightly different navy in dark mode.
 - There is no footer and no copyright line.
+- Sidebar links are the email, LinkedIn, and GitHub. Do not add a résumé link, button, or file anywhere on the site.
 - Mobile (860px and below): the sidebar becomes a sticky top bar with the name, tagline, theme toggle, and Menu button. No horizontal page scrolling at any width.
 - Each section starts with a short accent bar and an `h2`. Do not use section numbers anywhere (no `01`, `02`).
 - Keep the spacing generous: comfortable line height, wide margins, and clear breathing room in cards. Do not tighten it to fit more in.
@@ -23,15 +24,21 @@ A personal website, not a marketing site. Spacious and calm, never congested. A 
 - The sliding nav bar must always match the current view.
 
 ## How each section presents information
-- Home: hero and stats only. The name is the largest text on the page, directly under three separate status pills ("Open to internships", "Open to co-ops", "Open to new grad roles"), then the positioning "AI & Software Development", intro, actions, and a compact stats strip (not large metric cards). "Download résumé" is always the first, primary button, followed by "Explore my work". In the stats, 7,700+ (prepared as 5,350 observations) is governance data and 161 economies is the separate Global Economic Prospects dataset. Never merge them into one claim.
-- About: one large statement and a short paragraph, based on the Profile in `resume.pdf`.
+- Home: hero and stats only. The name is the largest text on the page, directly under three separate status pills ("Open to internships", "Open to co-ops", "Open to new grad roles"), then the positioning "AI & Software Development", intro, actions, and a compact stats strip (not large metric cards). The actions are "Explore my work" (primary, to Experience) and "Get in touch" (to Contact). In the stats, 7,700+ (prepared as 5,350 observations) is governance data and 161 economies is the separate Global Economic Prospects dataset. Never merge them into one claim.
+- About: one large statement and a short paragraph, based on the Profile in Vedsai's résumé.
 - Experience: a natural 2-line overview under the heading, then a thin vertical timeline on the left (`.timeline`) with a dot and bold dates above each card, in the format "Feb 2026 – Present". Current roles come first by newest start date, then past roles by most recent end date (World Bank, Student Tutor, Product Recall, Nonprofit Performance, SAAF HCI). In each card: the MacEwan logo tile to the left, the role as the biggest text, then the employer line (`.role-org`: "MacEwan University", or "kihêw waciston Indigenous Centre, MacEwan University" for the tutor role), the research area where there is one, a short overview, exactly 3 highlights with numbers in `<strong>`, clear tool tags, and a native `<details class="more-details">` closed by default for everything else.
 - Projects: a grid of compact tiles (`.project-grid`, `.project-tile`) that adds rows as projects are added, in this order: Offshoot, IknowServiceAI, ClaimWillow, Duck Duck Defer, Movie Rental Database Management System, Tower of Finance. A tile has only the name, an award badge where it applies, a one-line pitch, a few tech tags, and a `.tile-actions` row: the "View more" button, plus small icon links (`.tile-icon`, each with an `aria-label`) to the live demo and GitHub when the project has them. Everything else goes in the tile's `.project-detail`, which `script.js` copies into the shared `<dialog>` when "View more" is pressed. Below the grid, a simple "Visit my GitHub ↗" link.
 - Deployed projects (Offshoot, IknowServiceAI, ClaimWillow) show in the dialog, in this order: role, dates, and status (`.detail-meta`); "Live demo ↗" and "GitHub ↗" buttons (`.detail-actions`) and text links to the release, evaluation, or demo video (`.detail-links`); a "Try the demo" box (`.demo-box`) with the public demo logins and password, a note that all data is synthetic and that the first load on free hosting can take up to about a minute, and, for Offshoot and IknowServiceAI, that the public demo runs mock AI; then problem, key features, results, 2–3 screenshots (`.detail-shots`), the architecture flow with its diagram, testing and quality, and the grouped tech stack (`.tech-groups`). The older projects keep role, problem, features, flow, testing, my contributions, and full tech list.
-- Skills: chips in the résumé's four groups (Programming & Development; AI, Machine Learning & Automation; Backend, Databases & Cloud; Software Engineering & Tools), with the official logo next to each language and tool that has one. Plain text where no official logo exists. Do not substitute a similar or generic logo.
-- Organizations: the organization roles from `resume.pdf` in this order: MAIA Vice President, Director of Events, Badminton volunteer. Same card style as Experience, with the logo tile, dates at the top right of the card, a short overview, exactly 3 highlights, and "More details". Do not create an Accomplishments section unless Vedsai asks for it.
+- Skills: chips in 18 groups, each a native `<details class="skill-group">` whose summary shows the group name and its skill count. The most technical groups come first, and the first four (Programming Languages, Software Development, Artificial Intelligence & Machine Learning, Databases) start open. An "Expand all" / "Collapse all" button (`#skills-toggle`, JavaScript only) sits above the list. The groups and skills come from the list Vedsai supplied in November 2026, plus the earlier skills kept from the project details. Show the official logo next to each language and tool that has one. Plain text where no official logo exists. Do not substitute a similar or generic logo.
+- Organizations: the organization roles from Vedsai's résumé in this order: MAIA Vice President, Director of Events, Badminton volunteer. Same card style as Experience, with the logo tile, dates at the top right of the card, a short overview, exactly 3 highlights, and "More details". Do not create an Accomplishments section unless Vedsai asks for it.
 - Education: one compact block with the degree first, the dates, and "Expected Dec 2027" as a tag.
-- Contact: email is the most prominent item, with the copy button beside it, then the other links.
+- Contact: email is the most prominent item, with the copy button beside it, then LinkedIn and GitHub.
+
+## Site notice
+- A small card (`#site-notice`, `role="status"`, `aria-label="Site notice"`) says the site may not have the latest information and points recruiters to the résumé submitted with the application. Keep that wording unless Vedsai changes it.
+- With JavaScript it fades up 0.7 s after load at the bottom-left of the content column on desktop (clear of the sidebar, the side diagram, and back to top), and across the bottom of the screen on mobile, where back to top moves above it (`--notice-height`). It never blocks the page.
+- The × button (44px, keyboard focusable) and Esc close it. Esc closes the mobile menu or the project dialog first. Once closed, it stays closed for the visit (`sessionStorage` key `site-notice-closed`). Closing it while it has focus moves focus to the current view's heading.
+- Without JavaScript it shows as a plain note above the content, without the × button.
 
 ## Visual style
 - Font: Lexend from Google Fonts for all headings and body text. IBM Plex Mono is allowed for small labels only. No serif fonts anywhere.
@@ -52,7 +59,7 @@ A personal website, not a marketing site. Spacious and calm, never congested. A 
 - Switching uses a circular View Transition from the toggle, a simple fade where that is unsupported, and no animation for reduced motion.
 
 ## Diagrams
-- Every section without cards has its own small labelled diagram, and every card in Experience, Projects, and Organizations has its own, set with `data-diagram` and defined in `DIAGRAMS` in `script.js`. Each has data dots travelling along the lines, always including an amber one. Labels come from `resume.pdf` and the workflows in Vedsai's private detail notes, kept short. Do not invent facts or architecture details.
+- Every section without cards has its own small labelled diagram, and every card in Experience, Projects, and Organizations has its own, set with `data-diagram` and defined in `DIAGRAMS` in `script.js`. Each has data dots travelling along the lines, always including an amber one. Labels come from Vedsai's résumé and the workflows in Vedsai's private detail notes, kept short. Do not invent facts or architecture details.
 - Captions are plain titles with no `//` prefix.
 - On views with cards, the diagram follows the active card. The active card comes from scroll position, hover, click, or keyboard focus, and whichever happened last wins. The active card gets a subtle accent border and soft shadow, so it is clear which card the diagram belongs to. Do not add a coloured bar on the edge of a card.
 - Wide screens (1240px and up): fixed on the right, in space reserved by `--diagram-space`. Narrow screens: the short `chain` version, above the section heading or at the top of each card. Never on the left. The project dialog also draws that project's full diagram, to the right of the flow text on wider screens and below it on phones.
@@ -61,16 +68,17 @@ A personal website, not a marketing site. Spacious and calm, never congested. A 
 - Switching crossfades and redraws the diagram. Animation stays in CSS, with no JavaScript animation loop. It pauses when the tab is hidden or the diagram is off screen. Under reduced motion it shows a static diagram with no transition.
 
 ## Motion
-- Allowed: the quick view change, the `.reveal` fade-up, the sliding nav bar, hover transitions, the slight lift on project tiles, the project dialog's quick fade-up, the "More details" expand, the theme transition, and the diagrams.
+- Allowed: the quick view change, the `.reveal` fade-up, the sliding nav bar, hover transitions, the slight lift on project tiles, the project dialog's quick fade-up, the "More details" and skill group expand, the site notice's fade, the cursor ring, the theme transition, and the diagrams.
 - `.reveal` may animate only `opacity` and `translate`, so it never shifts layout.
 - No bouncing, typing effects, or count-ups. Numbers must be readable immediately.
 - Everything must switch off under `prefers-reduced-motion: reduce`. Put CSS motion inside the `no-preference` media block, and check `reduceMotion` in `script.js`.
 - The page must stay fully readable without JavaScript: hide content only under the `.js` class or `data-view`.
 
 ## Custom cursor
-- A solid caret with a soft ring. It must follow the mouse instantly, so keep it as a real browser cursor image (`cursorImage` in `script.js`, applied through `--cursor-default` and `--cursor-link`). Do not replace it with an element moved by JavaScript, and do not add easing or brackets.
-- Keep the image within 32 by 32 pixels, or browsers restrict it near the window edges.
-- Links, buttons, and summaries use the stronger version. Over actual text the normal text cursor shows, and text fields use the native cursor.
+- A small accent dot with a soft ring that trails it. The dot must follow the mouse instantly, so keep it as a real browser cursor image (`cursorImage` in `script.js`, applied through `--cursor-default` and `--cursor-link`).
+- The ring (`.cursor-ring`) is a decorative element with `pointer-events: none`, moved by `transform` in a `requestAnimationFrame` loop that stops once it has caught up. It grows over links, buttons, summaries, and labels, shrinks while the mouse is pressed, fades out over text and form fields, and hides when the mouse leaves the window, when a touch or pen is used, and while the project dialog is open (the dialog is in the browser's top layer, so only the dot shows there). Only its size, opacity, and fill animate, in CSS.
+- Keep the cursor image within 32 by 32 pixels, or browsers restrict it near the window edges.
+- Links, buttons, and summaries use the slightly larger dot. Over actual text the normal text cursor shows, and text fields use the native cursor.
 - Colours are read from `--accent` and `--page`, so it follows the theme. Never shown for touch or reduced-motion visitors. Browsers that do not support SVG cursors show the normal cursor.
 
 ## Accessibility
@@ -84,15 +92,15 @@ A personal website, not a marketing site. Spacious and calm, never congested. A 
 - Use plain HTML, CSS, and JavaScript in `index.html`, `styles.css`, and `script.js`.
 - External resources are limited to Google Fonts and skill logos from `cdn.jsdelivr.net`, with the version pinned in the address and `loading="lazy"`. Do not add other dependencies, frameworks, or a build step unless explicitly requested. Local images go in `assets/`. Project screenshots go in `assets/projects/<project>/` as WebP or optimized PNG, at most about 1400px wide, with `width`, `height`, `loading="lazy"`, and descriptive alt text. Copy them only from each project repository's own generated screenshot folder, prefer the light theme, and never use an image that shows secrets, terminals, browser bookmarks, other tabs, or personal information.
 - Preserve GitHub Pages compatibility, including the empty `.nojekyll` file, and keep the page fast.
-- Keep visible content in `index.html` and `resume.pdf` at the repository root.
+- Keep visible content in `index.html` at the repository root. Do not add a résumé file to the repository: anything committed here can be opened by its URL.
 - Keep the page title, meta description, Open Graph tags, and favicon links in `<head>` accurate. `og:image` and `og:url` must be absolute `https://ved-cmpt.github.io/` URLs.
 
 ## Content constraints
-- `resume.pdf` and the private Experience Details and Project Details notes Vedsai supplied are the sources of truth. Do not invent experience, achievements, metrics, project links, certifications, or skills. Use only details supplied by Vedsai.
-- For Offshoot, IknowServiceAI, and ClaimWillow, Vedsai's private project detail files are an allowed source alongside `resume.pdf`, together with the public repositories' README, `docs/`, and release notes (`github.com/ved-cmpt/offshoot`, `/iknowserviceai`, `/ClaimWillow`). Take test counts from the final README, release notes, or latest CI run on main, and leave out any number that cannot be confirmed there.
+- Vedsai's résumé (no longer published here; the last committed copy is `resume.pdf` in commit `a51654d`) and the private Experience Details and Project Details notes Vedsai supplied are the sources of truth. Do not invent experience, achievements, metrics, project links, certifications, or skills. Use only details supplied by Vedsai.
+- For Offshoot, IknowServiceAI, and ClaimWillow, Vedsai's private project detail files are an allowed source alongside Vedsai's résumé, together with the public repositories' README, `docs/`, and release notes (`github.com/ved-cmpt/offshoot`, `/iknowserviceai`, `/ClaimWillow`). Take test counts from the final README, release notes, or latest CI run on main, and leave out any number that cannot be confirmed there.
 - Those private notes must never be saved or copied into this repository.
-- Tower of Finance stays as the last project at Vedsai's request, even though it is not in the current résumé. Unity, Jetpack Compose, React, FastAPI, PostgreSQL, Docker, and pytest come from the résumé's project lists or Tower of Finance, not its Skills section. Java, TypeScript, COBOL, Angular, Spring Boot, ASP.NET Core, SQLAlchemy, Render, Neon, Vitest, Playwright, Selenium, Cucumber, Testcontainers, GitHub Actions, and Maven come from the Offshoot, IknowServiceAI, and ClaimWillow details. COBOL, ASP.NET Core, Neon, and Testcontainers stay plain text because no official logo is available on the allowed CDN.
-- Every number on the site must appear in `resume.pdf`, those notes, or (for the three deployed projects) their public repositories. Stats must also match the Experience section.
+- Tower of Finance stays as the last project at Vedsai's request, even though it is not in the current résumé. Unity, Jetpack Compose, React, FastAPI, PostgreSQL, Docker, and pytest come from the résumé's project lists or Tower of Finance, not its Skills section. Java, TypeScript, COBOL, Angular, Spring Boot, ASP.NET Core, SQLAlchemy, Render, Neon, Vitest, Playwright, Selenium, Cucumber, Testcontainers, GitHub Actions, and Maven come from the Offshoot, IknowServiceAI, and ClaimWillow details. COBOL, ASP.NET Core, Neon, and Testcontainers stay plain text because no official logo is available on the allowed CDN, and so do Microsoft 365 and Google Workspace.
+- Every number on the site must appear in Vedsai's résumé, those notes, or (for the three deployed projects) their public repositories. Stats must also match the Experience section.
 - Do not add Vedsai's phone number to the site's HTML, CSS, or JavaScript.
 
 ## Accuracy rules
