@@ -453,14 +453,25 @@ html:not(.js) .site-notice { margin: 24px clamp(22px, calc(4 * var(--vw)), 64px)
   .diagram--side { position: fixed; z-index: 5; top: 76px; right: calc(18px + var(--scrollbar-offset)); display: block; width: 240px; height: min(calc(100vh - 110px), 440px); }
 }
 
-/* Custom cursor: a solid caret with a soft ring, drawn by script.js as a real browser cursor image.
-   The operating system moves it, so it follows the mouse with no lag and is always on top.
-   Links and buttons get a stronger version. Text shows the normal text cursor. */
-html.has-code-cursor { cursor: var(--cursor-default), auto; }
-html.has-code-cursor :is(a, button, summary) { cursor: var(--cursor-link), pointer; }
-html.has-code-cursor.over-text { cursor: text; }
-html.has-code-cursor .project-modal::backdrop { cursor: var(--cursor-default), auto; }
-html.has-code-cursor :is(input, textarea, select, [contenteditable]) { cursor: auto; }
+/* Custom cursor: a small accent dot with a soft ring that trails it.
+   The dot is a real browser cursor image drawn by script.js, so the operating system moves it with
+   no lag and it is always on top. The ring is a decorative element that eases after it, grows over
+   links and buttons, shrinks while the mouse is pressed, and fades out over text and form fields,
+   where the normal text cursor shows. It never takes clicks (pointer-events: none). */
+html.has-custom-cursor { cursor: var(--cursor-default), auto; }
+html.has-custom-cursor :is(a, button, summary, label) { cursor: var(--cursor-link), pointer; }
+html.has-custom-cursor.over-text { cursor: text; }
+html.has-custom-cursor .project-modal::backdrop { cursor: var(--cursor-default), auto; }
+html.has-custom-cursor :is(input, textarea, select, [contenteditable]) { cursor: auto; }
+.cursor-ring { position: fixed; z-index: 999; top: 0; left: 0; width: 36px; height: 36px; margin: -18px 0 0 -18px; pointer-events: none; opacity: 0; }
+.cursor-ring.is-visible { opacity: 1; }
+.cursor-ring span { display: block; width: 100%; height: 100%; border: 1.5px solid var(--accent); border-radius: 50%; opacity: .5; }
+.cursor-ring.is-link span { opacity: 1; scale: 1.4; background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.cursor-ring.is-pressed span { scale: .7; }
+.cursor-ring.is-link.is-pressed span { scale: 1.1; }
+.cursor-ring.is-text span { opacity: 0; scale: .4; }
+/* A modal dialog sits in the browser's top layer, above any element, so only the dot shows there */
+html.modal-open .cursor-ring { visibility: hidden; }
 
 /* Motion. Everything here is off for reduced-motion visitors. */
 @media (prefers-reduced-motion: no-preference) {
@@ -478,13 +489,20 @@ html.has-code-cursor :is(input, textarea, select, [contenteditable]) { cursor: a
 
   /* The bar slides to the current section */
   .nav-indicator { transition: transform 320ms cubic-bezier(.3, .7, .3, 1), height 320ms ease, opacity 200ms ease; }
-  .button, .pager-link, .copy-button, .back-to-top, .theme-toggle, .site-nav a, .side-links a, .note a, .email-link, .contact-links a, .more-details summary, .tile-open, .tile-icon, .detail-links a, .detail-shots a, .modal-close { transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, opacity 200ms ease, visibility 200ms ease; }
-  .more-details summary::after { transition: transform 200ms ease, margin-top 200ms ease; }
+  .button, .pager-link, .copy-button, .back-to-top, .theme-toggle, .site-nav a, .side-links a, .note a, .email-link, .contact-links a, .more-details summary, .tile-open, .tile-icon, .detail-links a, .detail-shots a, .modal-close, .notice-close, .skills-toggle, .skill-group h3 { transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, opacity 200ms ease, visibility 200ms ease; }
+  .more-details summary::after, .skill-group summary::after { transition: transform 200ms ease, margin-top 200ms ease; }
 
-  /* "More details" opens smoothly in browsers that support it, and instantly in others */
-  .more-details { interpolate-size: allow-keywords; }
-  .more-details::details-content { height: 0; overflow: clip; transition: height 260ms ease, content-visibility 260ms allow-discrete; }
-  .more-details[open]::details-content { height: auto; }
+  /* "More details" and the skill groups open smoothly in browsers that support it, and instantly in others */
+  .more-details, .skill-group { interpolate-size: allow-keywords; }
+  :is(.more-details, .skill-group)::details-content { height: 0; overflow: clip; transition: height 260ms ease, content-visibility 260ms allow-discrete; }
+  :is(.more-details, .skill-group)[open]::details-content { height: auto; }
+
+  /* The site notice fades up into the corner, and fades out when closed */
+  .js .site-notice { transition: opacity 280ms ease, translate 280ms ease, visibility 280ms ease; }
+
+  /* Cursor ring: the position comes from script.js; only its size and fill animate here */
+  .cursor-ring { transition: opacity 200ms ease; }
+  .cursor-ring span { transition: scale 220ms cubic-bezier(.3, .7, .3, 1), opacity 200ms ease, background-color 200ms ease; }
 
   /* Project dialog opens and closes with a quick fade-up */
   .project-modal[open] { animation: modal-in 220ms cubic-bezier(.2, .7, .3, 1); }
@@ -529,7 +547,7 @@ html.theme-fade, html.theme-fade * { transition: background-color 320ms ease, co
 }
 @media print {
   .js .reveal:not(.is-visible) { opacity: 1; translate: none; }
-  .back-to-top, .diagram, .theme-toggle, .view-pager, .chip-icon, .tile-open, .project-modal { display: none !important; }
+  .back-to-top, .diagram, .theme-toggle, .view-pager, .chip-icon, .tile-open, .project-modal, .site-notice, .cursor-ring, .skills-bar { display: none !important; }
   .js .project-detail { display: block; }
   html[data-view] main > section { display: block !important; padding-right: 0; }
 }
