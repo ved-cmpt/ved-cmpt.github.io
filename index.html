@@ -79,6 +79,15 @@
   </header>
 
   <div class="main-col">
+    <!-- "This site may be outdated" notice. With JavaScript it is a small card in the corner, shown once
+         per visit until closed (× or Esc). Without JavaScript it shows here, above the content. -->
+    <aside class="site-notice" id="site-notice" role="status" aria-label="Site notice">
+      <span class="notice-dot" aria-hidden="true"></span>
+      <p class="notice-text"><strong>Heads up:</strong> this website may not have my latest information. For the most accurate and up-to-date details, please refer to the résumé I submitted with my application.</p>
+      <button class="notice-close" type="button" aria-label="Close notice" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </aside>
     <div class="diagram diagram--band" aria-hidden="true"></div>
     <main id="main">
       <!-- HOME / INTRODUCTION -->

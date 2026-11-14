@@ -411,6 +411,20 @@ html.modal-open body { padding-right: var(--scrollbar-offset); }
 .contact-links { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 24px; font-weight: 500; }
 .contact-links a { display: inline-flex; align-items: center; min-height: 32px; }
 
+/* "This site may be outdated" notice. Without JavaScript it sits above the content; with it, it is a
+   small card at the bottom of the content column (clear of the sidebar, the diagram, and back to top). */
+.site-notice { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: start; gap: 12px; padding: 14px 18px; border: 1px solid var(--warm-line); border-radius: 14px; background: var(--surface); color: var(--text); font-size: .9rem; line-height: 1.6; }
+.site-notice[hidden] { display: none; }
+html:not(.js) .site-notice { margin: 24px clamp(22px, calc(4 * var(--vw)), 64px) 0; }
+.js .site-notice { position: fixed; z-index: 15; bottom: 24px; left: calc(var(--sidebar-width) + 24px); width: min(400px, calc(100% - var(--sidebar-width) - 48px)); padding: 14px 10px 14px 18px; box-shadow: var(--menu-shadow); }
+.js .site-notice:not(.is-visible) { opacity: 0; translate: 0 12px; visibility: hidden; }
+.notice-dot { width: 9px; height: 9px; margin-top: .55em; border-radius: 50%; background: var(--warm); }
+.notice-text strong { font-weight: 600; }
+.notice-close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: -8px 0 -8px -4px; padding: 0; border: 1px solid transparent; border-radius: 50%; background: transparent; color: var(--accent-strong); cursor: pointer; }
+.notice-close:hover { border-color: var(--line); background: var(--accent-soft); }
+.notice-close[hidden] { display: none; }
+.notice-close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
 /* Back to top */
 .back-to-top { position: fixed; z-index: 90; right: calc(20px + var(--scrollbar-offset)); bottom: 20px; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); color: var(--accent-strong); font-family: var(--mono); font-size: .8rem; font-weight: 500; text-decoration: none; box-shadow: var(--float-shadow); }
 .back-to-top:hover { border-color: var(--accent); }
@@ -557,6 +571,10 @@ html.theme-fade, html.theme-fade * { transition: background-color 320ms ease, co
   .diagram--band { right: 22px; width: calc(100% - 44px); }
   .back-to-top { right: calc(14px + var(--scrollbar-offset)); bottom: 14px; justify-content: center; min-width: 44px; padding: 0 10px; font-size: 1rem; }
   .back-to-top-label { display: none; }
+  /* The notice spans the bottom of the screen, so back to top moves above it while it is open */
+  .js .site-notice { right: calc(12px + var(--scrollbar-offset)); bottom: 12px; left: 12px; width: auto; }
+  html:not(.js) .site-notice { margin: 20px 22px 0; }
+  html.notice-open .back-to-top { bottom: calc(24px + var(--notice-height, 0px)); }
   .contact-links a, .more-details summary, .note a { min-height: 44px; }
   .note a { display: inline-flex; align-items: center; }
   .copy-button { min-height: 44px; }
