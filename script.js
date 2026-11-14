@@ -1,20 +1,16 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const root = document.documentElement;
 
-/* Custom cursor: a solid caret with a soft ring, as a real browser cursor image. The operating
-   system moves it, so it follows the mouse instantly. Desktop mouse only, and off for
-   reduced-motion visitors. Colours are read from the theme, so they follow any palette change. */
+/* Custom cursor: a small accent dot with a soft ring that trails it. The dot is a real browser
+   cursor image, so the operating system moves it and it follows the mouse instantly. The ring is a
+   light element that eases after it (see "Cursor ring" below). Desktop mouse only, and off for touch
+   and reduced-motion visitors, who keep the normal cursor. Colours are read from the theme. */
 const cursorAllowed = !reduceMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 const cursorImage = (accent, halo, active) => {
-  const ring = active
-    ? `<circle cx='16' cy='16' r='14' fill='${accent}' fill-opacity='.32' stroke='${accent}' stroke-width='2'/>`
-    : `<circle cx='16' cy='16' r='13' fill='${accent}' fill-opacity='.14' stroke='${accent}' stroke-opacity='.6' stroke-width='1.25'/>`;
-  const caret = active
-    ? `<rect x='11' y='6' width='10' height='20' rx='2' fill='${accent}' stroke='${halo}' stroke-width='1.5'/>`
-    : `<rect x='12' y='7' width='8' height='18' rx='1.5' fill='${accent}' stroke='${halo}' stroke-width='1.5'/>`;
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='16' cy='16' r='15.25' fill='none' stroke='${halo}' stroke-opacity='.55' stroke-width='1.25'/>${ring}${caret}</svg>`;
-  return `url("data:image/svg+xml,${encodeURIComponent(svg)}") 16 16`;
+  const radius = active ? 5 : 4;
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24'><circle cx='12' cy='12' r='${radius}' fill='${accent}' stroke='${halo}' stroke-width='1.5'/></svg>`;
+  return `url("data:image/svg+xml,${encodeURIComponent(svg)}") 12 12`;
 };
 
 const updateCursorColors = () => {
@@ -259,7 +255,8 @@ backToTop.addEventListener("click", (event) => {
 });
 
 /* Over text the normal text cursor shows, using the same text-only area as the browser's own */
-const INTERACTIVE_OR_FIELD = "a, button, summary, input, textarea, select, [contenteditable]";
+const INTERACTIVE = "a, button, summary, label";
+const FIELD = "input, textarea, select, [contenteditable]";
 let pointerX = -1;
 let pointerY = -1;
 
@@ -273,11 +270,41 @@ const isOverText = (x, y) => {
   return [...range.getClientRects()].some((box) => x >= box.left && x <= box.right && y >= box.top && y <= box.bottom);
 };
 
-const updateTextCursor = () => {
+/* Cursor ring: eases after the dot in requestAnimationFrame, and stops when it has caught up */
+const cursorRing = cursorAllowed ? document.createElement("div") : null;
+const RING_FOLLOW = 0.22;
+let ringX = 0;
+let ringY = 0;
+let ringFrame = 0;
+let ringTime = 0;
+
+const moveRing = (time) => {
+  /* The same speed at any refresh rate */
+  const elapsed = ringTime ? Math.min(time - ringTime, 64) : 16.7;
+  ringTime = time;
+  const ease = 1 - (1 - RING_FOLLOW) ** (elapsed / 16.7);
+  ringX += (pointerX - ringX) * ease;
+  ringY += (pointerY - ringY) * ease;
+  const settled = Math.abs(pointerX - ringX) < 0.1 && Math.abs(pointerY - ringY) < 0.1;
+  if (settled) {
+    ringX = pointerX;
+    ringY = pointerY;
+  }
+  cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+  ringFrame = settled ? 0 : requestAnimationFrame(moveRing);
+  if (settled) ringTime = 0;
+};
+
+const updateCursorState = () => {
   if (pointerX < 0) return;
   const target = document.elementFromPoint(pointerX, pointerY);
-  const overText = Boolean(target) && !target.closest(INTERACTIVE_OR_FIELD) && isOverText(pointerX, pointerY);
+  const overField = Boolean(target?.closest(FIELD));
+  const overLink = !overField && Boolean(target?.closest(INTERACTIVE));
+  const overText = Boolean(target) && !overField && !overLink && isOverText(pointerX, pointerY);
   root.classList.toggle("over-text", overText);
+  if (!cursorRing) return;
+  cursorRing.classList.toggle("is-link", overLink);
+  cursorRing.classList.toggle("is-text", overText || overField);
 };
 
 /* Everything that follows the mouse or scroll runs at most once per frame */
@@ -285,7 +312,7 @@ let frameRequested = false;
 const update = () => {
   frameRequested = false;
   backToTop.classList.toggle("is-visible", window.scrollY > 500);
-  updateTextCursor();
+  updateCursorState();
   followScroll();
 };
 function requestUpdate() {
@@ -295,12 +322,38 @@ function requestUpdate() {
 }
 
 if (cursorAllowed) {
-  root.classList.add("has-code-cursor");
-  document.addEventListener("mousemove", (event) => {
+  root.classList.add("has-custom-cursor");
+  cursorRing.className = "cursor-ring";
+  cursorRing.setAttribute("aria-hidden", "true");
+  cursorRing.append(document.createElement("span"));
+  document.body.append(cursorRing);
+
+  document.addEventListener("pointermove", (event) => {
+    /* A touch or pen on a laptop screen hides the ring; the next mouse movement brings it back */
+    if (event.pointerType !== "mouse") {
+      cursorRing.classList.remove("is-visible");
+      return;
+    }
     pointerX = event.clientX;
     pointerY = event.clientY;
+    if (!cursorRing.classList.contains("is-visible")) {
+      ringX = pointerX;
+      ringY = pointerY;
+      cursorRing.classList.add("is-visible");
+    }
+    if (!ringFrame) ringFrame = requestAnimationFrame(moveRing);
     requestUpdate();
   }, { passive: true });
+  document.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse") cursorRing.classList.add("is-pressed");
+  }, { passive: true });
+  const release = () => cursorRing.classList.remove("is-pressed");
+  document.addEventListener("pointerup", release, { passive: true });
+  window.addEventListener("blur", release);
+  /* Leaving the window hides the ring */
+  document.addEventListener("mouseout", (event) => {
+    if (!event.relatedTarget) cursorRing.classList.remove("is-visible", "is-pressed");
+  });
 }
 window.addEventListener("scroll", requestUpdate, { passive: true });
 window.addEventListener("resize", () => {
