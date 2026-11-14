@@ -5,9 +5,8 @@ A personal, readability-first portfolio for job applications. Each section is it
 ## Files
 - `index.html` — content and sections
 - `styles.css` — design and animations
-- `script.js` — section views, theme toggle, menu, sliding navigation bar, fade-up, custom cursor, section diagrams, project dialog, and copy email button
+- `script.js` — section views, theme toggle, menu, sliding navigation bar, fade-up, custom cursor, site notice, section diagrams, project dialog, skills expand-all, and copy email button
 - `assets/` — official MacEwan University logo files, unmodified from macewan.ca, and project screenshots in `assets/projects/`
-- `resume.pdf` — downloadable résumé
 - `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` — "VV" site icons
 - `og-image.png` — preview image for links shared on LinkedIn and elsewhere
 - `EDITING.md` — manual editing instructions
@@ -16,7 +15,13 @@ A personal, readability-first portfolio for job applications. Each section is it
 - `.nojekyll` — GitHub Pages compatibility
 
 ## Preview
-Open `index.html` in a browser.
+Open `index.html` in a browser, or serve the folder locally so it behaves like GitHub Pages:
+
+```bash
+python -m http.server 8000
+```
+
+Then open `http://localhost:8000`. Once dismissed, the "site may be outdated" notice stays closed for the rest of that tab's visit; open a new tab to see it again.
 
 ## Publish
 Upload all files to the root of `ved-cmpt.github.io`, then configure GitHub Pages to deploy from the `main` branch and root folder.
