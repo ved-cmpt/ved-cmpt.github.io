@@ -4,9 +4,9 @@ The site uses only three code files:
 
 - `index.html` — all visible text and sections
 - `styles.css` — layout, spacing, colour, and typography
-- `script.js` — section views, theme toggle, mobile menu, sliding navigation bar, fade-up, custom cursor, section diagrams, project dialog, and copy email button
+- `script.js` — section views, theme toggle, mobile menu, sliding navigation bar, fade-up, custom cursor, site notice, section diagrams, project dialog, skills expand-all, and copy email button
 
-Local images are in `assets/`. The included `resume.pdf` is used by the résumé links and the "Download résumé" button. Fonts load from Google Fonts through a link in the `<head>` of `index.html`.
+Local images are in `assets/`. The site deliberately has no résumé download, so do not add a résumé file: anything in the repository can be opened by its URL. Fonts load from Google Fonts through a link in the `<head>` of `index.html`.
 
 ## Which copy should you edit?
 
@@ -49,9 +49,17 @@ If the project has a live demo and a public repository, copy the whole Offshoot 
 
 Find `<!-- ORGANIZATIONS -->`. Copy one complete `<article class="role reveal"> ... </article>` block, paste it under the others, and replace the content. Use a short overview, 3 highlights, and extra detail inside `<details class="more-details">`. Give it a new `data-diagram` name and add a matching entry to `DIAGRAMS` in `script.js`.
 
+## Add or move a skill
+
+Find `<!-- SKILLS -->`. Each group is a `<details class="skill-group">`. Add a chip as an `<li>` inside its `<ul class="chips">`, and update the number in `<span class="skill-count">`. Add `open` to a group's `<details>` to make it start expanded (the first four do). The "Expand all" button works with any number of groups.
+
 ## Add a skill logo
 
-Find `<!-- SKILLS -->`. Copy an `<img class="chip-icon" ...>` from another chip and change the logo in its address. Most logos come from Devicon, and Simple Icons has a few it lacks. Keep the version number in the address. If no official logo exists, leave the chip as plain text.
+Copy an `<img class="chip-icon" ...>` from another chip and change the logo in its address. Most logos come from Devicon, and Simple Icons has a few it lacks. Keep the version number in the address. If no official logo exists, leave the chip as plain text.
+
+## Change the "site may be outdated" notice
+
+Find `<aside class="site-notice"` near the top of `index.html` and edit the text in `<p class="notice-text">`. To remove the notice, delete the whole `<aside>` and the notice block in `script.js` (it starts with the comment about "This site may be outdated"). Once a visitor closes it, it stays closed for that browser tab (sessionStorage key `site-notice-closed`).
 
 ## Change the status badges
 
@@ -104,7 +112,7 @@ html[data-view]:not([data-view="certifications"]) #certifications,
 
 ## Animations
 
-Add the `reveal` class to any element that should fade up when its view opens or as it scrolls into view. All animations and the custom cursor turn off automatically for visitors who ask for reduced motion.
+Add the `reveal` class to any element that should fade up when its view opens or as it scrolls into view. All animations and the custom cursor (the dot and its trailing ring) turn off automatically for visitors who ask for reduced motion, and the custom cursor is never used on touch screens.
 
 ## Change the link preview
 
@@ -124,7 +132,7 @@ Find `DIAGRAMS` in `script.js`. Sections are listed by their `id`, and cards by 
 
 ## Preview and publish
 
-Preview by opening `index.html`, or use the Live Server extension in Cursor.
+Preview by opening `index.html`, by running `python -m http.server 8000` in this folder and opening `http://localhost:8000`, or with the Live Server extension in Cursor.
 
 Publish from Cursor's terminal:
 

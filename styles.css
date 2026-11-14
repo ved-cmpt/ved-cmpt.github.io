@@ -381,10 +381,23 @@ html.modal-open body { padding-right: var(--scrollbar-offset); }
   .modal-content .detail-flow { grid-template-columns: minmax(0, 1fr) 240px; }
 }
 
-/* Skills: grouped chips */
+/* Skills: grouped chips. Each group is a native <details>, most technical first, and the first few
+   start open. "Expand all" (JavaScript only) opens or closes every group at once. */
+.skills-bar { display: flex; justify-content: flex-end; }
+.skills-toggle { min-height: 42px; margin-bottom: 16px; padding: 0 16px; border: 1px solid var(--line); border-radius: 8px; background: transparent; color: var(--accent-strong); font: inherit; font-size: .88rem; font-weight: 500; cursor: pointer; }
+.skills-toggle:hover { border-color: var(--accent); background: var(--accent-soft); }
+.skills-toggle[hidden] { display: none; }
 .skill-groups { border-bottom: 1px solid var(--line); }
-.skill-group { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 12px 20px; padding-block: 26px; border-top: 1px solid var(--line); }
-.skill-group h3 { padding-top: 4px; font-size: .98rem; }
+.skill-group { border-top: 1px solid var(--line); }
+.skill-group summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; min-height: 64px; padding: 19px 36px 19px 0; position: relative; cursor: pointer; list-style: none; }
+.skill-group summary::-webkit-details-marker { display: none; }
+.skill-group summary::after { content: ""; position: absolute; top: 50%; right: 8px; width: 8px; height: 8px; margin-top: -6px; border-right: 2px solid var(--accent-strong); border-bottom: 2px solid var(--accent-strong); transform: rotate(45deg); }
+.skill-group[open] summary::after { margin-top: -2px; transform: rotate(-135deg); }
+.skill-group summary:focus-visible { outline-offset: -2px; }
+.skill-group h3 { font-size: 1.02rem; line-height: 1.45; }
+.skill-group summary:hover h3 { color: var(--accent-strong); }
+.skill-count { color: var(--muted); font-family: var(--mono); font-size: .76rem; white-space: nowrap; }
+.skill-group .chips { padding-bottom: 28px; }
 .chips { display: flex; flex-wrap: wrap; gap: 10px; }
 .chips li { display: inline-flex; align-items: center; gap: 8px; padding: 4px 13px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); font-size: .86rem; line-height: 1.6; }
 /* Logos keep their official colours. In dark mode each one sits on a small light tile so dark logos stay visible. */
@@ -410,6 +423,20 @@ html.modal-open body { padding-right: var(--scrollbar-offset); }
 .copy-button.is-copied { border-color: var(--warm); background: var(--warm-soft); color: var(--warm-text); }
 .contact-links { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 24px; font-weight: 500; }
 .contact-links a { display: inline-flex; align-items: center; min-height: 32px; }
+
+/* "This site may be outdated" notice. Without JavaScript it sits above the content; with it, it is a
+   small card at the bottom of the content column (clear of the sidebar, the diagram, and back to top). */
+.site-notice { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: start; gap: 12px; padding: 14px 18px; border: 1px solid var(--warm-line); border-radius: 14px; background: var(--surface); color: var(--text); font-size: .9rem; line-height: 1.6; }
+.site-notice[hidden] { display: none; }
+html:not(.js) .site-notice { margin: 24px clamp(22px, calc(4 * var(--vw)), 64px) 0; }
+.js .site-notice { position: fixed; z-index: 15; bottom: 24px; left: calc(var(--sidebar-width) + 24px); width: min(400px, calc(100% - var(--sidebar-width) - 48px)); padding: 14px 10px 14px 18px; box-shadow: var(--menu-shadow); }
+.js .site-notice:not(.is-visible) { opacity: 0; translate: 0 12px; visibility: hidden; }
+.notice-dot { width: 9px; height: 9px; margin-top: .55em; border-radius: 50%; background: var(--warm); }
+.notice-text strong { font-weight: 600; }
+.notice-close { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: -8px 0 -8px -4px; padding: 0; border: 1px solid transparent; border-radius: 50%; background: transparent; color: var(--accent-strong); cursor: pointer; }
+.notice-close:hover { border-color: var(--line); background: var(--accent-soft); }
+.notice-close[hidden] { display: none; }
+.notice-close svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 
 /* Back to top */
 .back-to-top { position: fixed; z-index: 90; right: calc(20px + var(--scrollbar-offset)); bottom: 20px; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); color: var(--accent-strong); font-family: var(--mono); font-size: .8rem; font-weight: 500; text-decoration: none; box-shadow: var(--float-shadow); }
@@ -439,14 +466,25 @@ html.modal-open body { padding-right: var(--scrollbar-offset); }
   .diagram--side { position: fixed; z-index: 5; top: 76px; right: calc(18px + var(--scrollbar-offset)); display: block; width: 240px; height: min(calc(100vh - 110px), 440px); }
 }
 
-/* Custom cursor: a solid caret with a soft ring, drawn by script.js as a real browser cursor image.
-   The operating system moves it, so it follows the mouse with no lag and is always on top.
-   Links and buttons get a stronger version. Text shows the normal text cursor. */
-html.has-code-cursor { cursor: var(--cursor-default), auto; }
-html.has-code-cursor :is(a, button, summary) { cursor: var(--cursor-link), pointer; }
-html.has-code-cursor.over-text { cursor: text; }
-html.has-code-cursor .project-modal::backdrop { cursor: var(--cursor-default), auto; }
-html.has-code-cursor :is(input, textarea, select, [contenteditable]) { cursor: auto; }
+/* Custom cursor: a small accent dot with a soft ring that trails it.
+   The dot is a real browser cursor image drawn by script.js, so the operating system moves it with
+   no lag and it is always on top. The ring is a decorative element that eases after it, grows over
+   links and buttons, shrinks while the mouse is pressed, and fades out over text and form fields,
+   where the normal text cursor shows. It never takes clicks (pointer-events: none). */
+html.has-custom-cursor { cursor: var(--cursor-default), auto; }
+html.has-custom-cursor :is(a, button, summary, label) { cursor: var(--cursor-link), pointer; }
+html.has-custom-cursor.over-text { cursor: text; }
+html.has-custom-cursor .project-modal::backdrop { cursor: var(--cursor-default), auto; }
+html.has-custom-cursor :is(input, textarea, select, [contenteditable]) { cursor: auto; }
+.cursor-ring { position: fixed; z-index: 999; top: 0; left: 0; width: 36px; height: 36px; margin: -18px 0 0 -18px; pointer-events: none; opacity: 0; }
+.cursor-ring.is-visible { opacity: 1; }
+.cursor-ring span { display: block; width: 100%; height: 100%; border: 1.5px solid var(--accent); border-radius: 50%; opacity: .5; }
+.cursor-ring.is-link span { opacity: 1; scale: 1.4; background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.cursor-ring.is-pressed span { scale: .7; }
+.cursor-ring.is-link.is-pressed span { scale: 1.1; }
+.cursor-ring.is-text span { opacity: 0; scale: .4; }
+/* A modal dialog sits in the browser's top layer, above any element, so only the dot shows there */
+html.modal-open .cursor-ring { visibility: hidden; }
 
 /* Motion. Everything here is off for reduced-motion visitors. */
 @media (prefers-reduced-motion: no-preference) {
@@ -464,13 +502,20 @@ html.has-code-cursor :is(input, textarea, select, [contenteditable]) { cursor: a
 
   /* The bar slides to the current section */
   .nav-indicator { transition: transform 320ms cubic-bezier(.3, .7, .3, 1), height 320ms ease, opacity 200ms ease; }
-  .button, .pager-link, .copy-button, .back-to-top, .theme-toggle, .site-nav a, .side-links a, .note a, .email-link, .contact-links a, .more-details summary, .tile-open, .tile-icon, .detail-links a, .detail-shots a, .modal-close { transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, opacity 200ms ease, visibility 200ms ease; }
-  .more-details summary::after { transition: transform 200ms ease, margin-top 200ms ease; }
+  .button, .pager-link, .copy-button, .back-to-top, .theme-toggle, .site-nav a, .side-links a, .note a, .email-link, .contact-links a, .more-details summary, .tile-open, .tile-icon, .detail-links a, .detail-shots a, .modal-close, .notice-close, .skills-toggle, .skill-group h3 { transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease, opacity 200ms ease, visibility 200ms ease; }
+  .more-details summary::after, .skill-group summary::after { transition: transform 200ms ease, margin-top 200ms ease; }
 
-  /* "More details" opens smoothly in browsers that support it, and instantly in others */
-  .more-details { interpolate-size: allow-keywords; }
-  .more-details::details-content { height: 0; overflow: clip; transition: height 260ms ease, content-visibility 260ms allow-discrete; }
-  .more-details[open]::details-content { height: auto; }
+  /* "More details" and the skill groups open smoothly in browsers that support it, and instantly in others */
+  .more-details, .skill-group { interpolate-size: allow-keywords; }
+  :is(.more-details, .skill-group)::details-content { height: 0; overflow: clip; transition: height 260ms ease, content-visibility 260ms allow-discrete; }
+  :is(.more-details, .skill-group)[open]::details-content { height: auto; }
+
+  /* The site notice fades up into the corner, and fades out when closed */
+  .js .site-notice { transition: opacity 280ms ease, translate 280ms ease, visibility 280ms ease; }
+
+  /* Cursor ring: the position comes from script.js; only its size and fill animate here */
+  .cursor-ring { transition: opacity 200ms ease; }
+  .cursor-ring span { transition: scale 220ms cubic-bezier(.3, .7, .3, 1), opacity 200ms ease, background-color 200ms ease; }
 
   /* Project dialog opens and closes with a quick fade-up */
   .project-modal[open] { animation: modal-in 220ms cubic-bezier(.2, .7, .3, 1); }
@@ -515,7 +560,7 @@ html.theme-fade, html.theme-fade * { transition: background-color 320ms ease, co
 }
 @media print {
   .js .reveal:not(.is-visible) { opacity: 1; translate: none; }
-  .back-to-top, .diagram, .theme-toggle, .view-pager, .chip-icon, .tile-open, .project-modal { display: none !important; }
+  .back-to-top, .diagram, .theme-toggle, .view-pager, .chip-icon, .tile-open, .project-modal, .site-notice, .cursor-ring, .skills-bar { display: none !important; }
   .js .project-detail { display: block; }
   html[data-view] main > section { display: block !important; padding-right: 0; }
 }
@@ -557,6 +602,10 @@ html.theme-fade, html.theme-fade * { transition: background-color 320ms ease, co
   .diagram--band { right: 22px; width: calc(100% - 44px); }
   .back-to-top { right: calc(14px + var(--scrollbar-offset)); bottom: 14px; justify-content: center; min-width: 44px; padding: 0 10px; font-size: 1rem; }
   .back-to-top-label { display: none; }
+  /* The notice spans the bottom of the screen, so back to top moves above it while it is open */
+  .js .site-notice { right: calc(12px + var(--scrollbar-offset)); bottom: 12px; left: 12px; width: auto; }
+  html:not(.js) .site-notice { margin: 20px 22px 0; }
+  html.notice-open .back-to-top { bottom: calc(24px + var(--notice-height, 0px)); }
   .contact-links a, .more-details summary, .note a { min-height: 44px; }
   .note a { display: inline-flex; align-items: center; }
   .copy-button { min-height: 44px; }
@@ -576,7 +625,6 @@ html.theme-fade, html.theme-fade * { transition: background-color 320ms ease, co
   .role-dates { width: 100%; padding: 0 0 0 62px; }
   .modal-bar { padding-left: 22px; padding-right: 14px; }
   .modal-body { padding: 20px 22px 32px; }
-  .skill-group { grid-template-columns: minmax(0, 1fr); }
   .course-rows > div { grid-template-columns: minmax(0, 1fr); padding-block: 10px; }
   .tech-groups > div { grid-template-columns: minmax(0, 1fr); }
   .demo-box { padding-inline: 16px; }
